@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "640664056135",
+    "project_id": "ftworldstreet",
+    "storage_bucket": "ftworldstreet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640664056135:android:4c2c5ad65cd07a763e5c62",
+        "android_client_info": {
+          "package_name": "com.example.ft_worldstreet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640664056135-4pasu2v6m0ndv6lou1ruqf3mo66eto3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsW3d0F4A6XHHxpSzabuLPbT6inJ1Aam0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640664056135-4pasu2v6m0ndv6lou1ruqf3mo66eto3e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
