@@ -67,7 +67,7 @@ class _AllAssetsViewState extends State<AllAssetsView> {
                       child: Row(
                         children: [
                           Image.asset(
-                            'assets/icons/btc.png',
+                            'assets/icons/b${i % 3}.png',
                             height: 40.h,
                             width: 40.h,
                           ),
@@ -76,7 +76,7 @@ class _AllAssetsViewState extends State<AllAssetsView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               RegularText(
-                                'BTC',
+                                ['BTC', 'LTC', 'ETH'][i % 3],
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
                               ),

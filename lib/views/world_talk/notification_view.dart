@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../home/all_traders_view.dart';
 import '../widgets/custom_text.dart';
 
 class NotificationsView extends StatefulWidget {
@@ -222,7 +223,7 @@ class NotifBody extends StatelessWidget {
                   backgroundColor: Colors.grey,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.r),
-                      child: Image.asset('assets/icons/image.png')),
+                      child: Image.asset('assets/icons/p${i % 3}.png')),
                 ),
                 SizedBox(width: 16.h),
                 Expanded(
@@ -230,7 +231,7 @@ class NotifBody extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       RegularText(
-                        'Daysm23t',
+                        names[i % 3],
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
                         color: AppColors.black,

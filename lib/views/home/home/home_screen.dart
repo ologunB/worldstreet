@@ -424,7 +424,7 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        "Rewards",
+                        "Trending on WorldTalk",
                         style: const TextStyle().normal20w600,
                       ),
                       const Spacer(),

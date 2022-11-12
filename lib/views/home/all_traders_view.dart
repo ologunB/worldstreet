@@ -202,7 +202,7 @@ class TraderList extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.asset(
-                      'assets/icons/man.png',
+                      'assets/icons/p${i % 3}.png',
                       height: 40.h,
                       width: 40.h,
                     ),
@@ -211,7 +211,7 @@ class TraderList extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RegularText(
-                          'Daniel435',
+                          names[i],
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                         ),
@@ -262,3 +262,18 @@ class TraderList extends StatelessWidget {
         });
   }
 }
+
+List<String> names = [
+  'Daniel435',
+  'Favour Eden',
+  'Zakaria',
+  'Richard',
+  'Daniel435',
+  'Favour Eden',
+  'Zakaria',
+  'Richard',
+  'Daniel435',
+  'Favour Eden',
+  'Zakaria',
+  'Richard'
+];

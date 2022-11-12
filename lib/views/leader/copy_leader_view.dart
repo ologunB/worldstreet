@@ -45,7 +45,7 @@ class _CopyLeaderViewState extends State<CopyLeaderView> {
             color: AppColors.black,
           ),
           SizedBox(height: 24.h),
-          const LeaderItem(),
+          const LeaderItem(i: 1),
           SizedBox(height: 16.h),
           GeneralButton(
             'Stake Amount',

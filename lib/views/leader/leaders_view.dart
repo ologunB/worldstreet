@@ -54,7 +54,7 @@ class _LeadersViewState extends State<LeadersView> {
                   },
                   splashColor: Colors.white,
                   highlightColor: Colors.white,
-                  child: const LeaderItem(),
+                  child: LeaderItem(i: i),
                 );
               }),
           SizedBox(height: 100.h),
@@ -88,7 +88,7 @@ class _LeadersViewState extends State<LeadersView> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100.h),
                     child: Image.asset(
-                      'assets/icons/image.png',
+                      'assets/icons/p${val % 3}.png',
                     ),
                   ),
                 ),
@@ -137,8 +137,9 @@ class _LeadersViewState extends State<LeadersView> {
 }
 
 class LeaderItem extends StatelessWidget {
-  const LeaderItem({Key? key}) : super(key: key);
+  const LeaderItem({Key? key, required this.i}) : super(key: key);
 
+  final int i;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -168,7 +169,7 @@ class LeaderItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100.h),
                       child: Image.asset(
-                        'assets/icons/image.png',
+                        'assets/icons/p${i % 3}.png',
                       ),
                     ),
                   ),

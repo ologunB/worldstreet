@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/views/others/spaces_view.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
+import '../authentication/selectspace/select_space_screen.dart';
 import '../others/profile_view.dart';
 import 'custom_text.dart';
 import 'floating_navbar.dart';
@@ -124,6 +125,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       push(context, const SpacesView());
                       return;
                     }
+                    if (name == 'Market API') {
+                      Navigator.pop(cContext);
+                      push(context, const SelectSpaceScreen());
+                      return;
+                    }
                     Navigator.pop(cContext);
                   },
                 );
@@ -140,6 +146,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     'Journal',
     'Profile',
     'Spaces',
+    'Market API',
     'Trade History',
     'Nexa (Tour Guide)',
   ];

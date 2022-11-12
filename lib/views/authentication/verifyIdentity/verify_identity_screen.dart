@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/app_route.dart';
 import 'package:ft_worldstreet/components/buttons.dart';
@@ -10,6 +9,7 @@ import 'package:ft_worldstreet/schema/color_schema.dart';
 import 'package:ft_worldstreet/schema/text_style.dart';
 import 'package:ft_worldstreet/utils/enum.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class VerifyIdentityScreen extends StatefulWidget {
   const VerifyIdentityScreen({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _VerifyIdentityScreenState extends State<VerifyIdentityScreen> {
   //
   // final SelectCityScreenController selectCityScreenController =
   //     Get.find<SelectCityScreenController>();
-  List<String>? _imagePath;
+  String? _imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -230,25 +230,28 @@ class _VerifyIdentityScreenState extends State<VerifyIdentityScreen> {
                   buttonType: ButtonType.enable,
                   borderRadius: 10,
                   onTap: () async {
-                    _imagePath = await CunningDocumentScanner.getPictures();
-                    for (int i = 0; i < (_imagePath ?? []).length; i++) {
-                      await verifyIdentityScreenController.profileApiCall(
-                          verifyCountry1: selectCityScreenController
-                              .tempCountryModelList[selectCityScreenController
-                                  .isSelectedChoiceIndex.value]
-                              .name
-                              .toString(),
-                          verifyMethod1:
-                              verifyIdentityScreenController.groupValue.value ==
-                                      0
-                                  ? "National Identity Card"
-                                  : verifyIdentityScreenController
-                                              .groupValue.value ==
-                                          1
-                                      ? "International Passport"
-                                      : "Driver’s license",
-                          verifyDocument1: File(_imagePath?[i] ?? ""));
-                    }
+                    final ImagePicker picker = ImagePicker();
+                    final XFile? image =
+                        await picker.pickImage(source: ImageSource.gallery);
+
+                    if (image == null) return;
+                    _imagePath = image.path;
+
+                    await verifyIdentityScreenController.profileApiCall(
+                        verifyCountry1: selectCityScreenController
+                            .tempCountryModelList[selectCityScreenController
+                                .isSelectedChoiceIndex.value]
+                            .name
+                            .toString(),
+                        verifyMethod1:
+                            verifyIdentityScreenController.groupValue.value == 0
+                                ? "National Identity Card"
+                                : verifyIdentityScreenController
+                                            .groupValue.value ==
+                                        1
+                                    ? "International Passport"
+                                    : "Driver’s license",
+                        verifyDocument1: File(_imagePath ?? ""));
                   },
                   text: "Continue",
                 ),

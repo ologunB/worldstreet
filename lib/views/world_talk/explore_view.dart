@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/views/widgets/custom_button.dart';
+import '../home/all_traders_view.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/utils.dart';
@@ -110,7 +111,7 @@ class _ExploreViewState extends State<ExploreView> {
                         backgroundColor: Colors.grey,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20.r),
-                            child: Image.asset('assets/icons/image.png')),
+                            child: Image.asset('assets/icons/p${i % 3}.png')),
                       ),
                       SizedBox(width: 16.h),
                       Expanded(
@@ -118,7 +119,7 @@ class _ExploreViewState extends State<ExploreView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RegularText(
-                              'Daysm23t',
+                              names[i % 3],
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
                               color: AppColors.black,

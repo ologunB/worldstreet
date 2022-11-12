@@ -43,7 +43,7 @@ class _JournalDetailsViewState extends State<JournalDetailsView> {
           SizedBox(height: 24.h),
           ClipRRect(
             borderRadius: BorderRadius.circular(12.h),
-            child: Image.asset('assets/icons/chart.png'),
+            child: Image.asset('assets/icons/j0.png'),
           ),
           SizedBox(height: 16.h),
           RegularText(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:linkfy_text/linkfy_text.dart';
+import '../home/all_traders_view.dart';
 import '../widgets/custom_text.dart';
 import 'create_feed.dart';
 import 'explore_view.dart';
@@ -112,9 +113,9 @@ class _WorldTalkViewState extends State<WorldTalkView> {
                   ],
                 ),
                 SizedBox(width: 8.h),
-                ...List.generate(8, (index) => 0)
+                ...List.generate(8, (i) => i)
                     .map(
-                      (e) => Container(
+                      (i) => Container(
                         margin: EdgeInsets.only(right: 8.h),
                         padding: EdgeInsets.all(2.h),
                         decoration: BoxDecoration(
@@ -135,8 +136,8 @@ class _WorldTalkViewState extends State<WorldTalkView> {
                                   backgroundColor: Colors.grey,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(70.r),
-                                    child:
-                                        Image.asset('assets/icons/image.png'),
+                                    child: Image.asset(
+                                        'assets/icons/p${i % 3}.png'),
                                   ),
                                 ),
                                 Container(
@@ -176,7 +177,7 @@ class _WorldTalkViewState extends State<WorldTalkView> {
                       backgroundColor: Colors.grey,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(20.r),
-                          child: Image.asset('assets/icons/image.png')),
+                          child: Image.asset('assets/icons/p${i % 3}.png')),
                     ),
                     SizedBox(width: 16.h),
                     Expanded(
@@ -184,7 +185,7 @@ class _WorldTalkViewState extends State<WorldTalkView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           RegularText(
-                            '@Emery',
+                            '@${names[i % 3]}',
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: AppColors.black,

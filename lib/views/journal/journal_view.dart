@@ -36,7 +36,7 @@ class _JournalViewState extends State<JournalView> {
               padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 12.h),
               physics: const ClampingScrollPhysics(),
               itemBuilder: (_, i) {
-                return const JournalItem();
+                return JournalItem(i: i);
               }),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.h),
@@ -54,7 +54,7 @@ class _JournalViewState extends State<JournalView> {
               padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 12.h),
               physics: const ClampingScrollPhysics(),
               itemBuilder: (_, i) {
-                return const JournalItem();
+                return JournalItem(i: i);
               }),
           SizedBox(height: 50.h),
         ],
@@ -64,8 +64,9 @@ class _JournalViewState extends State<JournalView> {
 }
 
 class JournalItem extends StatelessWidget {
-  const JournalItem({Key? key}) : super(key: key);
+  const JournalItem({Key? key, required this.i}) : super(key: key);
 
+  final int i;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -93,7 +94,7 @@ class JournalItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
                 child: Image.asset(
-                  'assets/icons/chart.png',
+                  'assets/icons/j${i.isEven ? 0 : 1}.png',
                   height: 80.h,
                   width: 80.h,
                   fit: BoxFit.cover,
