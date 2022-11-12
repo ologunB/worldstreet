@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:ft_worldstreet/schema/color_schema.dart';
 
-class ItsyText extends StatelessWidget {
-  const ItsyText(
+class RegularText extends StatelessWidget {
+  const RegularText(
     this.text, {
     Key? key,
     this.color,
@@ -19,9 +19,11 @@ class ItsyText extends StatelessWidget {
     this.blur = false,
     this.fontSize = 14,
     this.onTap,
+    this.fontFamily,
   }) : super(key: key);
 
   final String text;
+  final String? fontFamily;
   final Color? color;
   final double? fontSize;
   final double? letterSpacing;
@@ -36,14 +38,33 @@ class ItsyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = GoogleFonts.inter(
-      color: color,
-      letterSpacing: letterSpacing,
-      fontSize: fontSize,
-      height: height,
-      fontWeight: fontWeight,
-      decoration: decoration,
-    );
+    TextStyle textStyle = fontFamily == 'Gilroy'
+        ? TextStyle(
+            fontFamily: fontFamily,
+            color: color,
+            letterSpacing: letterSpacing,
+            fontSize: fontSize,
+            height: height,
+            fontWeight: fontWeight,
+            decoration: decoration,
+          )
+        : fontFamily == 'Poppins'
+            ? GoogleFonts.poppins(
+                color: color,
+                letterSpacing: letterSpacing,
+                fontSize: fontSize,
+                height: height,
+                fontWeight: fontWeight,
+                decoration: decoration,
+              )
+            : GoogleFonts.inter(
+                color: color,
+                letterSpacing: letterSpacing,
+                fontSize: fontSize,
+                height: height,
+                fontWeight: fontWeight,
+                decoration: decoration,
+              );
     return InkWell(
       onTap: onTap,
       child: Text(text,

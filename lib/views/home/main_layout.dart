@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../widgets/custom_text.dart';
+import 'package:ft_worldstreet/views/world_talk/world_talk_view.dart';
+import '../journal/journal_view.dart';
+import '../leader/leaders_view.dart';
+import '../others/profile_view.dart';
+import '../widgets/drawer.dart';
+import '../widgets/floating_navbar.dart';
+import 'home/home_screen.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({Key? key}) : super(key: key);
@@ -9,28 +14,22 @@ class MainLayout extends StatefulWidget {
   State<MainLayout> createState() => _MainLayoutState();
 }
 
+GlobalKey<ScaffoldState> mainLayoutScaffoldKey = GlobalKey<ScaffoldState>();
+
 class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: ItsyText(
-          'MainLayout',
-          color: AppColors.black,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        children: [
-          SizedBox(height: 20.h),
-          ItsyText(
-            'MainLayout is working',
-            color: AppColors.black,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w400,
-          ),
+      resizeToAvoidBottomInset: false,
+      key: mainLayoutScaffoldKey,
+      drawer: const NavigationDrawer(),
+      body: FloatingNavBar(
+        items: [
+          FloatingNavBarItem(img: 'Home', page: HomeScreen()),
+          FloatingNavBarItem(img: 'Leader', page: const LeadersView()),
+          FloatingNavBarItem(img: 'World Talk', page: const WorldTalkView()),
+          FloatingNavBarItem(img: 'Journal', page: const JournalView()),
+          FloatingNavBarItem(img: 'Profile', page: const ProfileView()),
         ],
       ),
     );

@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+
+import 'package:ft_worldstreet/views/widgets/custom_text.dart';
+
+import '../others/profile_view.dart';
+import 'drawer.dart';
 
 class FloatingNavBar extends StatefulWidget {
   final List<FloatingNavBarItem> items;
 
-  const FloatingNavBar({Key key, @required this.items});
+  const FloatingNavBar({super.key, required this.items});
 
   @override
-  _FloatingNavBarState createState() {
-    return _FloatingNavBarState();
-  }
+  FloatingNavBarState createState() => FloatingNavBarState();
 }
 
-class _FloatingNavBarState extends State<FloatingNavBar> {
-  PageController bottomNavbarController = PageController(initialPage: 1);
-  int currentIndex = 1;
+PageController bottomNavbarController = PageController(initialPage: 0);
+
+class FloatingNavBarState extends State<FloatingNavBar> {
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             PageView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               controller: bottomNavbarController,
               children: widget.items.map((item) => item.page).toList(),
               onPageChanged: (index) => _changePage(index),
@@ -36,31 +38,29 @@ class _FloatingNavBarState extends State<FloatingNavBar> {
               left: 0,
               right: 0,
               bottom: 20.h,
-              child: SafeArea(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 16.h),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.h),
+                ),
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 40.h),
+                  height: 73.h,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30.h),
+                    borderRadius: BorderRadius.circular(20.h),
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.baground.withOpacity(.6),
+                        blurRadius: 10.h,
+                        spreadRadius: 5.h,
+                      )
+                    ],
                   ),
-                  child: Container(
-                    height: 65.h,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.h),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          stops: [0, 2],
-                          colors: <Color>[
-                            Color(0xff432FBF),
-                            Color(0xffE86FCE),
-                          ],
-                        )),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: _widgetsBuilder(widget.items),
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: _widgetsBuilder(widget.items),
                   ),
                 ),
               ),
@@ -73,91 +73,78 @@ class _FloatingNavBarState extends State<FloatingNavBar> {
 
   Widget _floatingNavBarItem(FloatingNavBarItem item, int index) {
     return FutureBuilder(
-        future: Future.value(true),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Container();
-          }
-          return Column(
+      future: Future.value(true),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Container();
+        }
+        return InkWell(
+          onTap: () => _changePage(index),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              InkWell(
-                onTap: () {
-                  _changePage(index);
-                },
-                child: Container(
-                  padding: EdgeInsets.all(10.h),
-                  width: 50.h,
-                  decoration: BoxDecoration(
-                      color: currentIndex == index
-                          ? AppColors.white
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(16.h)),
-                  child: currentIndex != index
-                      ? Icon(
-                          item.img,
-                          size: 24.h,
-                          color: Colors.white,
-                        )
-                      : RadiantGradientMask(
-                          child: Icon(
-                            item.img,
-                            size: 24.h,
-                            color: Color(0xffE86FCE),
-                          ),
-                        ),
-                ),
+              Image.asset(
+                'assets/icons/${item.img}.png',
+                height: 24.h,
+                width: 24.h,
+                color: currentIndex == index
+                    ? AppColors.skyBlue
+                    : AppColors.black.withOpacity(.2),
+              ),
+              const SizedBox(height: 6),
+              RegularText(
+                item.img,
+                color: currentIndex == index
+                    ? AppColors.skyBlue
+                    : AppColors.black.withOpacity(.2),
+                fontSize: 13.sp,
               ),
             ],
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   List<Widget> _widgetsBuilder(List<FloatingNavBarItem> items) {
-    List<Widget> _floatingNavBarItems = [];
+    List<Widget> floatingNavBarItems = [];
     for (int i = 0; i < items.length; i++) {
-      Widget item = this._floatingNavBarItem(items[i], i);
-      _floatingNavBarItems.add(item);
+      Widget item = _floatingNavBarItem(items[i], i);
+      floatingNavBarItems.add(item);
     }
-    return _floatingNavBarItems;
+    return floatingNavBarItems;
   }
 
   _changePage(index) async {
     currentIndex = index;
+    sideBarIndex = index;
+    profileIndex = 0;
     bottomNavbarController.jumpToPage(index);
     setState(() {});
   }
 }
 
 void moveUp(ScrollController control) {
-  if (control.hasClients)
+  if (control.hasClients) {
     control.animateTo(control.position.minScrollExtent - 60,
         curve: Curves.easeOut, duration: const Duration(milliseconds: 500));
+  }
 }
 
 class FloatingNavBarItem {
-  IconData img;
+  String img;
   Widget page;
 
-  FloatingNavBarItem({@required this.img, @required this.page});
+  FloatingNavBarItem({required this.img, required this.page});
 }
 
 class RadiantGradientMask extends StatelessWidget {
-  const RadiantGradientMask({this.child});
+  const RadiantGradientMask({super.key, this.child});
 
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) => LinearGradient(
-        colors: [
-          Color(0xFF8F51B1),
-          Color(0xffE86FCE),
-        ],
-        tileMode: TileMode.mirror,
-      ).createShader(bounds),
-      child: child,
-    );
+    return child!;
   }
 }

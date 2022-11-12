@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'custom_text.dart';
 
-class ItsyButton extends StatefulWidget {
-  const ItsyButton(this.text,
+class GeneralButton extends StatefulWidget {
+  const GeneralButton(this.text,
       {Key? key,
       this.buttonColor,
       this.textColor,
@@ -37,10 +37,10 @@ class ItsyButton extends StatefulWidget {
   final bool isActive;
 
   @override
-  State<ItsyButton> createState() => _ItsyButtonState();
+  State<GeneralButton> createState() => _GeneralButtonState();
 }
 
-class _ItsyButtonState extends State<ItsyButton> {
+class _GeneralButtonState extends State<GeneralButton> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -85,12 +85,13 @@ class _ItsyButtonState extends State<ItsyButton> {
                             color: widget.iconColor,
                           ),
                         ),
-                      ItsyText(
+                      RegularText(
                         widget.text,
                         color: widget.isActive
                             ? widget.textColor
                             : widget.textColor!.withOpacity(.6),
                         fontSize: widget.fontSize,
+                        fontFamily: 'Poppins',
                         fontWeight: widget.fontWeight ?? FontWeight.w600,
                       ),
                     ],

@@ -32,6 +32,8 @@ abstract class AppColors {
   static const greyDark1 = Color(0xFF818488);
   static const red = Color(0xFFEB5757);
   static const greenUnread = Color(0xff4ED39D);
+  static const dGrey = Color(0xffBDBDBD);
+  static const lightBlue = Color(0xffE7F3FC);
 
   //single color for world street app................
   static const darkBlue = Color(0xff102949);
