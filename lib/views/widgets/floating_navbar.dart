@@ -87,9 +87,11 @@ class FloatingNavBarState extends State<FloatingNavBar> {
                 'assets/icons/${item.img}.png',
                 height: 24.h,
                 width: 24.h,
-                color: currentIndex == index
-                    ? AppColors.skyBlue
-                    : AppColors.black.withOpacity(.2),
+                color: currentIndex == 2
+                    ? null
+                    : currentIndex == index
+                        ? AppColors.skyBlue
+                        : AppColors.black.withOpacity(.2),
               ),
               const SizedBox(height: 6),
               RegularText(

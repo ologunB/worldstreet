@@ -3,6 +3,7 @@ import 'package:ft_worldstreet/views/widgets/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:linkfy_text/linkfy_text.dart';
 import '../home/all_traders_view.dart';
+import '../home/main_layout.dart';
 import '../widgets/custom_text.dart';
 import 'create_feed.dart';
 import 'explore_view.dart';
@@ -24,11 +25,17 @@ class _WorldTalkViewState extends State<WorldTalkView> {
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.white,
-        title: RegularText(
-          'World Talk Feed',
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w500,
-          color: AppColors.black,
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu_rounded,
+            size: 24.h,
+            color: AppColors.skyBlue,
+          ),
+          onPressed: () => mainLayoutScaffoldKey.currentState!.openDrawer(),
+        ),
+        title: Image.asset(
+          'assets/icons/World Talk.png',
+          height: 28.h,
         ),
         actions: [
           Padding(
@@ -220,6 +227,38 @@ class _WorldTalkViewState extends State<WorldTalkView> {
                               fit: BoxFit.cover,
                             ),
                           ),
+                          SizedBox(height: 6.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Image.asset(
+                                'assets/icons/comment.png',
+                                height: 24.h,
+                              ),
+                              SizedBox(width: 4.h),
+                              RegularText(
+                                '3',
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.black,
+                                fontFamily: 'Poppins',
+                              ),
+                              SizedBox(width: 12.h),
+                              Image.asset(
+                                'assets/icons/like.png',
+                                height: 24.h,
+                              ),
+                              SizedBox(width: 4.h),
+                              RegularText(
+                                '23',
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.black,
+                                fontFamily: 'Poppins',
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     )
