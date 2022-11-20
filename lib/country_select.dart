@@ -19,7 +19,7 @@ class _CountrySelectState extends State<CountrySelect> {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            dynamic data = await showModalBottomSheet(
+            await showModalBottomSheet(
               isScrollControlled: true,
               context: context,
               shape: RoundedRectangleBorder(
@@ -31,7 +31,6 @@ class _CountrySelectState extends State<CountrySelect> {
                 return const SearchCountry(selectedCountries: []);
               },
             );
-            print(data);
           },
           child: const Text('Show country picker'),
         ),

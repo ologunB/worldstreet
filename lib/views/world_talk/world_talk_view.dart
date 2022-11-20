@@ -202,12 +202,12 @@ class _WorldTalkViewState extends State<WorldTalkView> {
                           LinkifyText(
                             'In the next 3 days BNB, BTC & ETH will rise to unpresidented price.\n\nI have done my technical ana;ysis, i have monitored the candles carefully. Find below  a picture of my technical analysis of the candles. The analysis was done with my friend @Daysman43\n\nLet me knpw what you think in comment section. #WorldTalkCryptoRise',
                             textStyle: GoogleFonts.poppins(
-                              fontSize: 10.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xff939497),
+                              color: Colors.black,
                             ),
                             linkStyle: GoogleFonts.poppins(
-                              fontSize: 10.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xff1389DF),
                             ),
@@ -244,9 +244,9 @@ class _WorldTalkViewState extends State<WorldTalkView> {
                                 color: AppColors.black,
                                 fontFamily: 'Poppins',
                               ),
-                              SizedBox(width: 12.h),
+                              SizedBox(width: 20.h),
                               Image.asset(
-                                'assets/icons/like.png',
+                                'assets/icons/like0.png',
                                 height: 24.h,
                               ),
                               SizedBox(width: 4.h),
@@ -256,6 +256,12 @@ class _WorldTalkViewState extends State<WorldTalkView> {
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.black,
                                 fontFamily: 'Poppins',
+                              ),
+                              SizedBox(width: 20.h),
+                              Image.asset(
+                                'assets/icons/share.png',
+                                height: 22.h,
+                                color: AppColors.black,
                               ),
                             ],
                           )
