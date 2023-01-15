@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../home/all_traders_view.dart';
 import '../widgets/custom_text.dart';
 
@@ -206,6 +207,7 @@ class NotifBody extends StatelessWidget {
   const NotifBody({Key? key, this.hasMsg}) : super(key: key);
 
   final bool? hasMsg;
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

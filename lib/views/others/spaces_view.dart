@@ -12,6 +12,7 @@ class SpacesView extends StatefulWidget {
 
 class _SpacesViewState extends State<SpacesView> {
   List<int> spaces = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

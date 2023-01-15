@@ -17,6 +17,7 @@ class AllTradersView extends StatefulWidget {
 class _AllTradersViewState extends State<AllTradersView> {
   int currentIndex = 0;
   PageController pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

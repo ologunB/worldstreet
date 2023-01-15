@@ -482,6 +482,7 @@ class TransactionsBody extends StatefulWidget {
 class _TransactionsBodyState extends State<TransactionsBody> {
   int currentIndex = 0;
   PageController pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Column(

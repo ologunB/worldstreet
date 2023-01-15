@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/views/world_talk/world_talk_view.dart';
+
 import '../journal/journal_view.dart';
 import '../leader/leaders_view.dart';
 import '../others/profile_view.dart';
 import '../widgets/drawer.dart';
 import '../widgets/floating_navbar.dart';
-import 'home/home_screen.dart';
+import 'home_screen.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({Key? key}) : super(key: key);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:linkfy_text/linkfy_text.dart';
+
 import '../home/all_traders_view.dart';
 import '../home/main_layout.dart';
 import '../widgets/custom_text.dart';

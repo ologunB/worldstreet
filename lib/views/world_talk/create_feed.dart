@@ -11,6 +11,7 @@ class CreateFeedView extends StatefulWidget {
 
 class _CreateFeedViewState extends State<CreateFeedView> {
   final FocusNode _focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

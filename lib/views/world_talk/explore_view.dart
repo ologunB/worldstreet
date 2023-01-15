@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/views/widgets/custom_button.dart';
+
 import '../home/all_traders_view.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_textfield.dart';
@@ -15,6 +16,7 @@ class ExploreView extends StatefulWidget {
 
 class _ExploreViewState extends State<ExploreView> {
   List<int> all = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +85,7 @@ class _ExploreViewState extends State<ExploreView> {
       body: ListView(
         padding: EdgeInsets.all(24.h),
         children: [
-          ItsyTextField(
+          WorldStreetField(
             hintText: 'Find Interest',
             textInputType: TextInputType.text,
             maxLines: 1,

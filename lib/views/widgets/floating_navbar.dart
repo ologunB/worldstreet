@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:ft_worldstreet/views/widgets/custom_text.dart';
 
 import '../others/profile_view.dart';

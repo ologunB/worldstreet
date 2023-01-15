@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
-import '../widgets/custom_text.dart';
 import '../journal/journal_details_view.dart';
+import '../widgets/custom_text.dart';
 
 class JournalView extends StatefulWidget {
   const JournalView({Key? key}) : super(key: key);
@@ -67,6 +67,7 @@ class JournalItem extends StatelessWidget {
   const JournalItem({Key? key, required this.i}) : super(key: key);
 
   final int i;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

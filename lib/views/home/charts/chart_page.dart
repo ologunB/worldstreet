@@ -1,9 +1,11 @@
 import 'dart:convert';
+
+import 'package:candlesticks/candlesticks.dart';
+import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+
 import 'candle_ticker_model.dart';
 import 'repository.dart';
-import 'package:flutter/material.dart';
-import 'package:candlesticks/candlesticks.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 class ChartPage extends StatefulWidget {
   const ChartPage({Key? key}) : super(key: key);
@@ -229,6 +231,7 @@ class SymbolsSearchModal extends StatefulWidget {
 
 class _SymbolSearchModalState extends State<SymbolsSearchModal> {
   String symbolSearch = "";
+
   @override
   Widget build(BuildContext context) {
     return Center(

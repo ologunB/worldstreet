@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'custom_text.dart';
 
-class ItsyTextField extends StatefulWidget {
+class WorldStreetField extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final Widget? suffix;
@@ -28,7 +29,7 @@ class ItsyTextField extends StatefulWidget {
   final String? obscuringCharacter;
   final List<TextInputFormatter>? inputFormatters;
 
-  const ItsyTextField({
+  const WorldStreetField({
     super.key,
     this.prefixIcon,
     this.suffixIcon,
@@ -54,12 +55,14 @@ class ItsyTextField extends StatefulWidget {
     this.isEditProfile = false,
     this.authPrefix,
   });
+
   @override
-  State<ItsyTextField> createState() => _ItsyTextFieldState();
+  State<WorldStreetField> createState() => _WorldStreetFieldState();
 }
 
-class _ItsyTextFieldState extends State<ItsyTextField> {
+class _WorldStreetFieldState extends State<WorldStreetField> {
   bool _hasFocus = false;
+
   @override
   Widget build(BuildContext context) {
     return Material(

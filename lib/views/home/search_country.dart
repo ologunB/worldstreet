@@ -12,6 +12,7 @@ class SearchCountry extends StatefulWidget {
       : super(key: key);
 
   final List<Country> selectedCountries;
+
   @override
   State<SearchCountry> createState() => _SearchCountryState();
 }
@@ -20,6 +21,7 @@ class _SearchCountryState extends State<SearchCountry> {
   List<Country> allCountries = [];
   List<Country> selectedCountries = [];
   List<Country> filtered = [];
+
   @override
   void initState() {
     selectedCountries.addAll(widget.selectedCountries);
@@ -88,7 +90,7 @@ class _SearchCountryState extends State<SearchCountry> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.h),
-            child: ItsyTextField(
+            child: WorldStreetField(
               hintText: 'Search country',
               textInputType: TextInputType.text,
               maxLines: 1,

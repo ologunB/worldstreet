@@ -140,6 +140,7 @@ class LeaderItem extends StatelessWidget {
   const LeaderItem({Key? key, required this.i}) : super(key: key);
 
   final int i;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
