@@ -50,7 +50,7 @@ class _VerifyIdentityScreenState extends State<VerifyIdentityScreen> {
           height: 50.h,
           textColor: AppColors.white,
           fontWeight: FontWeight.w600,
-          onTap: () async {
+          onPressed: () async {
             final ImagePicker _picker = ImagePicker();
             final XFile? image =
                 await _picker.pickImage(source: ImageSource.gallery);

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:ft_worldstreet/views/auth/add_faceid_view.dart';
+import 'package:ft_worldstreet/views/auth/select_space_view.dart';
+import 'package:ft_worldstreet/views/widgets/utils.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
+import '../../core/view_models/auth_vm.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
-import '../widgets/utils.dart';
-import 'verify_email.dart';
+import '../widgets/snackbar.dart';
 
 class ConfirmPasscodeScreen extends StatefulWidget {
   const ConfirmPasscodeScreen({Key? key}) : super(key: key);
@@ -14,6 +20,14 @@ class ConfirmPasscodeScreen extends StatefulWidget {
 }
 
 class _ConfirmPasscodeScreenState extends State<ConfirmPasscodeScreen> {
+  TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    _checkBiometrics();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +59,9 @@ class _ConfirmPasscodeScreenState extends State<ConfirmPasscodeScreen> {
             Row(
               children: [
                 Pinput(
+                  obscureText: true,
                   length: 6,
+                  controller: controller,
                   defaultPinTheme: PinTheme(
                     width: 48.h,
                     height: 64.h,
@@ -58,7 +74,6 @@ class _ConfirmPasscodeScreenState extends State<ConfirmPasscodeScreen> {
                       borderRadius: BorderRadius.circular(12.h),
                     ),
                   ),
-                  onCompleted: (pin) => print(pin),
                 ),
               ],
             ),
@@ -72,13 +87,53 @@ class _ConfirmPasscodeScreenState extends State<ConfirmPasscodeScreen> {
               height: 50.h,
               textColor: AppColors.white,
               fontWeight: FontWeight.w600,
-              onTap: () {
-                push(context, VerifyEmailScreen());
+              onPressed: () {
+                AuthViewModel vm = context.read<AuthViewModel>();
+                if (controller.text.length != 6) {
+                  showSnackBar(
+                      context, 'Error', 'Enter your 6-digits passcode');
+                  return;
+                }
+                if (controller.text != vm.passcode1) {
+                  showSnackBar(context, 'Error',
+                      'Passcode doesn\'t match with previous passcode');
+                  return;
+                }
+                vm.setPasscode(controller.text);
+                if (canCheckBiometrics) {
+                  pushReplacement(context, AddFaceIDScreen());
+                } else {
+                  pushReplacement(context, SelectSpaceScreen());
+                }
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  bool canCheckBiometrics = false;
+  final LocalAuthentication auth = LocalAuthentication();
+  List<BiometricType> availableBiometrics = [];
+
+  Future<void> _checkBiometrics() async {
+    try {
+      canCheckBiometrics =
+          (await auth.canCheckBiometrics && await auth.isDeviceSupported());
+    } on PlatformException catch (e) {
+      print(e);
+    }
+
+    if (canCheckBiometrics) {
+      try {
+        availableBiometrics = await auth.getAvailableBiometrics();
+      } on PlatformException catch (e) {
+        print(e);
+      }
+    }
+    canCheckBiometrics = canCheckBiometrics && availableBiometrics.isNotEmpty;
+
+    setState(() {});
   }
 }

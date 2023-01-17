@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ft_worldstreet/views/home/main_layout.dart';
+import 'package:ft_worldstreet/views/auth/add_binance_view.dart';
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
@@ -35,8 +35,10 @@ class _SelectSpaceScreenState extends State<SelectSpaceScreen> {
           height: 50.h,
           textColor: AppColors.white,
           fontWeight: FontWeight.w600,
-          onTap: () {
-            pushAndRemoveUntil(context, MainLayout());
+          onPressed: () {
+            if (space == 1) {
+              pushReplacement(context, AddBinanceScreen());
+            }
           },
         ),
       ),

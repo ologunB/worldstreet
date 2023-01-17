@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ft_worldstreet/core/view_models/auth_vm.dart';
+import 'package:provider/provider.dart';
 
 import '../home/search_country.dart';
 import '../widgets/custom_button.dart';
@@ -42,7 +44,7 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -61,9 +63,13 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
           height: 50.h,
           textColor: AppColors.white,
           fontWeight: FontWeight.w600,
-          onTap: () {
-            push(context, SignupScreen());
-          },
+          onPressed: selectedCountry == null
+              ? null
+              : () {
+                  context.read<AuthViewModel>().selectedCountry =
+                      selectedCountry;
+                  push(context, SignupScreen());
+                },
         ),
       ),
       body: Container(

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
+import '../../core/view_models/auth_vm.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
+import '../widgets/snackbar.dart';
 import '../widgets/utils.dart';
 import 'confirm_passcode.dart';
 
@@ -14,6 +17,8 @@ class SetPasscodeScreen extends StatefulWidget {
 }
 
 class _SetPasscodeScreenState extends State<SetPasscodeScreen> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +50,9 @@ class _SetPasscodeScreenState extends State<SetPasscodeScreen> {
             Row(
               children: [
                 Pinput(
+                  obscureText: true,
                   length: 6,
+                  controller: controller,
                   defaultPinTheme: PinTheme(
                     width: 48.h,
                     height: 64.h,
@@ -58,7 +65,6 @@ class _SetPasscodeScreenState extends State<SetPasscodeScreen> {
                       borderRadius: BorderRadius.circular(12.h),
                     ),
                   ),
-                  onCompleted: (pin) => print(pin),
                 ),
               ],
             ),
@@ -72,8 +78,14 @@ class _SetPasscodeScreenState extends State<SetPasscodeScreen> {
               height: 50.h,
               textColor: AppColors.white,
               fontWeight: FontWeight.w600,
-              onTap: () {
-                push(context, ConfirmPasscodeScreen());
+              onPressed: () {
+                if (controller.text.length != 6) {
+                  showSnackBar(
+                      context, 'Error', 'Enter your 6-digits passcode');
+                  return;
+                }
+                context.read<AuthViewModel>().passcode1 = controller.text;
+                pushReplacement(context, ConfirmPasscodeScreen());
               },
             ),
           ],

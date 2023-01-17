@@ -4,16 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ft_worldstreet/views/auth/splash_screen.dart';
+import 'package:provider/provider.dart';
 
+import 'core/storage/local_storage.dart';
 import 'core/utils/navigator.dart';
+import 'locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setPreferredOrientations([
+  await AppCache.init(); //Initialize Hive
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitDown
   ]);
+  setupLocator();
   runApp(const MyApp());
 }
 
@@ -27,14 +32,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, builder) => MaterialApp(
-        home: SplashScreen(),
-        navigatorKey: AppNavigator.navKey,
-        debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: allProviders,
+      child: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, builder) => MaterialApp(
+          home: SplashScreen(),
+          navigatorKey: AppNavigator.navKey,
+          debugShowCheckedModeBanner: false,
+        ),
       ),
     );
   }

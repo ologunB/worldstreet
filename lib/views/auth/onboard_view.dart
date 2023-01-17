@@ -27,7 +27,7 @@ class _OnboardViewState extends State<OnboardView> {
           height: 50.h,
           textColor: AppColors.white,
           fontWeight: FontWeight.w600,
-          onTap: () {
+          onPressed: () {
             push(context, LoginScreen());
           },
         ),

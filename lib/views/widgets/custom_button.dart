@@ -7,7 +7,7 @@ class GeneralButton extends StatefulWidget {
       {Key? key,
       this.buttonColor,
       this.textColor,
-      this.onTap,
+      this.onPressed,
       this.borderColor,
       this.fontWeight,
       this.fontSize,
@@ -24,7 +24,7 @@ class GeneralButton extends StatefulWidget {
   final String text;
   final Color? buttonColor;
   final Color? textColor;
-  final Function()? onTap;
+  final Function()? onPressed;
   final Color? borderColor;
   final FontWeight? fontWeight;
   final double? fontSize;
@@ -46,7 +46,7 @@ class _GeneralButtonState extends State<GeneralButton> {
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        onTap: widget.isActive ? (widget.busy ? null : widget.onTap) : null,
+        onTap: widget.isActive ? (widget.busy ? null : widget.onPressed) : null,
         child: Container(
           height: widget.height,
           width: widget.width,

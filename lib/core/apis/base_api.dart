@@ -14,7 +14,7 @@ class BaseAPI {
         contentType: 'application/json',
         validateStatus: (int? s) => s! < 500,
         headers: {
-          'Authorization': 'Bearer ${AppCache.getToken()}',
+          'Authorization': 'Token ${AppCache.getToken()}',
         },
       ),
     );

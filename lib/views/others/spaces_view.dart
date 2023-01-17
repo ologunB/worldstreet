@@ -29,7 +29,7 @@ class _SpacesViewState extends State<SpacesView> {
             height: 56.h,
             textColor: AppColors.white,
             fontWeight: FontWeight.w600,
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
           ),

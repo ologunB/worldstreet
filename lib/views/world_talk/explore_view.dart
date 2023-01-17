@@ -33,7 +33,7 @@ class _ExploreViewState extends State<ExploreView> {
             height: 56.h,
             textColor: AppColors.white,
             fontWeight: FontWeight.w600,
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
           ),

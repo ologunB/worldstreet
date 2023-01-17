@@ -141,7 +141,7 @@ class _AssetDetailsViewState extends State<AssetDetailsView> {
                 height: 50.h,
                 textColor: AppColors.white,
                 fontWeight: FontWeight.w500,
-                onTap: () {
+                onPressed: () {
                   Navigator.pop(context);
                 },
               ),

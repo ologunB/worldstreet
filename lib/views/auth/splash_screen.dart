@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ft_worldstreet/views/home/main_layout.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
+import '../../core/storage/local_storage.dart';
 import 'onboard_view.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +16,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2), () {
-      pushReplacement(context, OnboardView());
+      if (AppCache.getUser() == null) {
+        pushReplacement(context, OnboardView());
+      } else {
+        pushReplacement(context, MainLayout());
+      }
     });
     super.initState();
   }
@@ -24,10 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Color(0xff102949),
       body: Center(
-        child: Image.asset(
-          'assets/icons/logo.png',
-          height: 100,
-        ),
+        child: Image.asset('assets/icons/logo.png', height: 100),
       ),
     );
   }

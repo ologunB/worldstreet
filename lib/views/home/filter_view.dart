@@ -164,7 +164,7 @@ class _FilterViewState extends State<FilterView> {
             height: 50.h,
             textColor: AppColors.white,
             fontWeight: FontWeight.w600,
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
           ),
@@ -177,7 +177,7 @@ class _FilterViewState extends State<FilterView> {
             height: 50.h,
             textColor: AppColors.skyBlue,
             fontWeight: FontWeight.w600,
-            onTap: () {
+            onPressed: () {
               selectedCountries.clear();
               setState(() {});
             },

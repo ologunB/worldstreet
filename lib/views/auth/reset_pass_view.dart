@@ -58,7 +58,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
               height: 50.h,
               textColor: AppColors.white,
               fontWeight: FontWeight.w600,
-              onTap: () {
+              onPressed: () {
                 pushReplacement(context, ConfirmPassScreen());
               },
             ),

@@ -73,7 +73,7 @@ class _ConfirmPassScreenState extends State<ConfirmPassScreen> {
               height: 50.h,
               textColor: AppColors.white,
               fontWeight: FontWeight.w600,
-              onTap: () {
+              onPressed: () {
                 pushReplacement(context, LoginScreen());
               },
             ),

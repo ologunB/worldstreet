@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ft_worldstreet/core/storage/local_storage.dart';
+import 'package:ft_worldstreet/views/auth/onboard_view.dart';
 import 'package:ft_worldstreet/views/others/spaces_view.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
@@ -129,6 +131,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       //   push(context, const SelectSpaceScreen());
                       return;
                     }
+                    if (name == 'Logout') {
+                      AppCache.clear();
+                      Navigator.pop(cContext);
+                      pushAndRemoveUntil(context, const OnboardView());
+                      return;
+                    }
                     Navigator.pop(cContext);
                   },
                 );
@@ -138,15 +146,16 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     );
   }
 
-  List<String> types = [
-    'Home',
-    'Leader',
-    'World Talk',
-    'Journal',
-    'Profile',
-    'Spaces',
-    'Market API',
-    'Trade History',
-    'Nexa (Tour Guide)',
-  ];
+  List<String> get types => [
+        'Home',
+        'Leader',
+        'World Talk',
+        'Journal',
+        'Profile',
+        'Spaces',
+        'Market API',
+        'Trade History',
+        'Nexa (Tour Guide)',
+        'Logout',
+      ];
 }

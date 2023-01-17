@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 
+import '../../core/storage/local_storage.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
+import '../widgets/snackbar.dart';
 import '../widgets/utils.dart';
 import 'select_space_view.dart';
 
@@ -33,9 +36,7 @@ class _AddFaceIDScreenState extends State<AddFaceIDScreen> {
           height: 50.h,
           textColor: AppColors.white,
           fontWeight: FontWeight.w600,
-          onTap: () {
-            push(context, SelectSpaceScreen());
-          },
+          onPressed: enableBiometric,
         ),
       ),
       body: SafeArea(
@@ -74,5 +75,19 @@ class _AddFaceIDScreenState extends State<AddFaceIDScreen> {
         ),
       ),
     );
+  }
+
+  final LocalAuthentication auth = LocalAuthentication();
+
+  void enableBiometric() async {
+    try {
+      bool didAuthenticate =
+          await auth.authenticate(localizedReason: 'Setup Biometric');
+      AppCache.hasBiometric(didAuthenticate);
+      if (didAuthenticate) push(context, SelectSpaceScreen());
+      setState(() {});
+    } catch (e) {
+      showSnackBar(context, null, e.toString());
+    }
   }
 }
