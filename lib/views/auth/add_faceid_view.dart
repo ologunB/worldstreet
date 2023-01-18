@@ -25,18 +25,22 @@ class _AddFaceIDScreenState extends State<AddFaceIDScreen> {
         elevation: 0,
         backgroundColor: AppColors.white,
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 24.h),
-        child: GeneralButton(
-          'Continue',
-          buttonColor: AppColors.skyBlue,
-          borderColor: AppColors.skyBlue,
-          borderRadius: 8.h,
-          fontSize: 14.sp,
-          height: 50.h,
-          textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
-          onPressed: enableBiometric,
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 24.h),
+          child: GeneralButton(
+            'Skip',
+            buttonColor: AppColors.skyBlue,
+            borderColor: AppColors.skyBlue,
+            borderRadius: 8.h,
+            fontSize: 14.sp,
+            height: 50.h,
+            textColor: AppColors.white,
+            fontWeight: FontWeight.w600,
+            onPressed: () {
+              push(context, SelectSpaceScreen());
+            },
+          ),
         ),
       ),
       body: SafeArea(
@@ -61,7 +65,7 @@ class _AddFaceIDScreenState extends State<AddFaceIDScreen> {
               ),
               Expanded(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: enableBiometric,
                   child: Center(
                     child: Image.asset(
                       'assets/icons/faceid.png',

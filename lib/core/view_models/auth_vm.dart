@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:ft_worldstreet/core/models/binance_model.dart';
 import 'package:ft_worldstreet/core/storage/local_storage.dart';
 import 'package:ft_worldstreet/views/auth/login_view.dart';
 import 'package:ft_worldstreet/views/auth/set_passcode.dart';
@@ -13,6 +14,7 @@ import '../../views/auth/reset_pass2_view.dart';
 import '../../views/widgets/snackbar.dart';
 import '../apis/auth_api.dart';
 import '../apis/base_api.dart';
+import '../models/balances_model.dart';
 import '../models/user_model.dart';
 import '../utils/navigator.dart';
 import 'base_vm.dart';
@@ -42,8 +44,8 @@ class AuthViewModel extends BaseModel {
   Future<void> resendEmail(Map<String, dynamic> a) async {
     setBusy(true);
     try {
-      String res = await _authApi.resendEmail(a);
-      showDialog('Code has been resent to your email', res);
+      await _authApi.resendEmail(a);
+      showDialog('Code has been resent to your email', 'Success');
       setBusy(false);
     } on CustomException catch (e) {
       error = e.message;
@@ -55,9 +57,9 @@ class AuthViewModel extends BaseModel {
   Future<void> verifyEmail(Map<String, dynamic> a) async {
     setBusy(true);
     try {
-      String res = await _authApi.verifyEmail(a);
+      await _authApi.verifyEmail(a);
       push(context, SetPasscodeScreen());
-      showDialog('Email has been verified', res);
+      showDialog('Email has been verified', 'Success');
       setBusy(false);
     } on CustomException catch (e) {
       error = e.message;
@@ -83,7 +85,7 @@ class AuthViewModel extends BaseModel {
     setBusy(true);
     try {
       await _authApi.reset(a);
-      pushReplacement(context, ConfirmPassScreen());
+      pushReplacement(context, ConfirmPassScreen(email: a));
       setBusy(false);
     } on CustomException catch (e) {
       error = e.message;
@@ -105,17 +107,106 @@ class AuthViewModel extends BaseModel {
     }
   }
 
-  List<User>? accounts;
+  String get userType =>
+      AppCache.getUser()?.userType == 'Trader' ? 'Staker' : 'Trader';
 
+  List<User>? accounts;
   Future<void> getAccounts() async {
     setBusy(true);
     try {
-      accounts = await _authApi.getList();
+      accounts = await _authApi.getUsersList();
       setBusy(false);
     } on CustomException catch (e) {
       error = e.message;
       setBusy(false);
       showDialog(e.message);
+    }
+    return null;
+  }
+
+  List<User>? traders;
+  Future<void> getTraderList() async {
+    setBusy(true);
+    try {
+      traders = await _authApi.getTraderList();
+      setBusy(false);
+    } on CustomException catch (e) {
+      error = e.message;
+      setBusy(false);
+      showDialog(e.message);
+    }
+    return null;
+  }
+
+  User? trader;
+  Future<void> getOneTrader(int? id) async {
+    setBusy(true);
+    try {
+      trader = await _authApi.getOneTrader(id);
+      setBusy(false);
+    } on CustomException catch (e) {
+      error = e.message;
+      setBusy(false);
+      showDialog(e.message);
+    }
+    return null;
+  }
+
+  Future<void> copyTrader(int? id) async {
+    setBusy(true);
+    try {
+      await _authApi.copyTrader(id);
+      showDialog('The Trader\'s trade has been subscribed to.', 'Success');
+      setBusy(false);
+    } on CustomException catch (e) {
+      error = e.message;
+      setBusy(false);
+      showDialog(e.message);
+    }
+    return null;
+  }
+
+  Future<bool> removeTrader(int? id) async {
+    setBusy(true);
+    try {
+      await _authApi.removeTrader(id);
+      setBusy(false);
+      return true;
+    } on CustomException catch (e) {
+      error = e.message;
+      setBusy(false);
+      showDialog(e.message);
+      return false;
+    }
+  }
+
+  List<BinanceModel>? allCoins;
+  Future<void> getCoins() async {
+    setBusy(true);
+    try {
+      allCoins = await _authApi.getCoins();
+      setBusy(false);
+    } on CustomException catch (e) {
+      error = e.message;
+      setBusy(false);
+      showDialog(e.message);
+    }
+    return null;
+  }
+
+  double totalBalance = 0;
+  List<BalanceModel>? balances;
+  Future<void> getBalances() async {
+    setBusy(true);
+    try {
+      balances = await _authApi.getBalances();
+      balances?.forEach((e) {
+        totalBalance = totalBalance + double.parse(e.free!);
+      });
+      setBusy(false);
+    } on CustomException catch (e) {
+      error = e.message;
+      setBusy(false);
     }
     return null;
   }
@@ -134,10 +225,10 @@ class AuthViewModel extends BaseModel {
     }
   }
 
-  Future<void> updateAccount(String key) async {
+  Future<void> updateAccount(String api, String secret) async {
     setBusy(true);
     try {
-      await _authApi.updateAccount(key);
+      await _authApi.updateAccount(api, secret);
       pushAndRemoveUntil(context, MainLayout());
       setBusy(false);
     } on CustomException catch (e) {

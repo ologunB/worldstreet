@@ -27,6 +27,8 @@ class _ProfileViewState extends State<ProfileView> {
               Image.asset(
                 'assets/icons/cover.png',
                 height: 220.h,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
               ),
               Align(
                 alignment: Alignment.topRight,

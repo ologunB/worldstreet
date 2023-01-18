@@ -8,8 +8,9 @@ import 'candle_ticker_model.dart';
 import 'repository.dart';
 
 class ChartPage extends StatefulWidget {
-  const ChartPage({Key? key}) : super(key: key);
+  const ChartPage({Key? key, required this.coin}) : super(key: key);
 
+  final String coin;
   @override
   ChartPageState createState() => ChartPageState();
 }
@@ -43,10 +44,9 @@ class ChartPageState extends State<ChartPage> {
 
   @override
   void initState() {
-    fetchSymbols().then((value) {
-      symbols = value;
-      if (symbols.isNotEmpty) fetchCandles('BTCUSDT', currentInterval);
-    });
+    String a = widget.coin;
+    if (a == 'USDT') a = 'TUSD';
+    fetchCandles('${a}USDT', currentInterval);
     super.initState();
   }
 

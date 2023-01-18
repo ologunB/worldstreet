@@ -23,9 +23,12 @@ GlobalKey<ScaffoldState> mainLayoutScaffoldKey = GlobalKey<ScaffoldState>();
 class _MainLayoutState extends State<MainLayout> {
   @override
   void initState() {
-    if (AppCache.getUser()?.binanceKey == null) {
-      pushReplacement(context, AddBinanceScreen());
-    }
+    Future.delayed(Duration(milliseconds: 500), () {
+      if (AppCache.getUser()?.binanceKey == null) {
+        pushReplacement(context, AddBinanceScreen());
+      }
+    });
+
     super.initState();
   }
 

@@ -41,23 +41,6 @@ class _NotificationsViewState extends State<NotificationsView> {
             fontWeight: FontWeight.w500,
             color: AppColors.black,
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 6.h),
-              child: InkWell(
-                onTap: () {},
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/noti.png',
-                      height: 40.h,
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
         ),
         body: Column(
           children: [

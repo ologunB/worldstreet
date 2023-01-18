@@ -24,22 +24,24 @@ class _SelectSpaceScreenState extends State<SelectSpaceScreen> {
         elevation: 0,
         backgroundColor: AppColors.white,
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 24.h),
-        child: GeneralButton(
-          'Continue',
-          buttonColor: AppColors.skyBlue,
-          borderColor: AppColors.skyBlue,
-          borderRadius: 8.h,
-          fontSize: 14.sp,
-          height: 50.h,
-          textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
-          onPressed: () {
-            if (space == 1) {
-              pushReplacement(context, AddBinanceScreen());
-            }
-          },
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 24.h),
+          child: GeneralButton(
+            'Continue',
+            buttonColor: AppColors.skyBlue,
+            borderColor: AppColors.skyBlue,
+            borderRadius: 8.h,
+            fontSize: 14.sp,
+            height: 50.h,
+            textColor: AppColors.white,
+            fontWeight: FontWeight.w600,
+            onPressed: () {
+              if (space == 1) {
+                pushReplacement(context, AddBinanceScreen());
+              }
+            },
+          ),
         ),
       ),
       body: SafeArea(

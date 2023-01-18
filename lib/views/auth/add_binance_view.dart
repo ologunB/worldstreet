@@ -16,7 +16,8 @@ class AddBinanceScreen extends StatefulWidget {
 
 class _AddBinanceScreenState extends State<AddBinanceScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController binance = TextEditingController();
+  TextEditingController api = TextEditingController();
+  TextEditingController secret = TextEditingController();
   bool autoValidate = false;
 
   @override
@@ -38,14 +39,14 @@ class _AddBinanceScreenState extends State<AddBinanceScreen> {
               padding: EdgeInsets.all(24.h),
               children: [
                 RegularText(
-                  'Add Binance Key',
+                  'Add Binance Credentials',
                   fontSize: 24.sp,
                   fontFamily: 'Gilroy',
                   fontWeight: FontWeight.bold,
                 ),
                 SizedBox(height: 17.h),
                 RegularText(
-                  'Enter your key here to get access to your addresses and balances',
+                  'Enter your key and secret here to get access to your addresses and balances',
                   fontSize: 14.sp,
                   fontFamily: 'Gilroy',
                   fontWeight: FontWeight.w600,
@@ -53,11 +54,25 @@ class _AddBinanceScreenState extends State<AddBinanceScreen> {
                 ),
                 SizedBox(height: 48.h),
                 WorldStreetField(
-                  hintText: 'Binance Key',
+                  hintText: 'Binance API Key',
                   textInputType: TextInputType.text,
                   maxLines: 1,
-                  controller: binance,
+                  controller: api,
+                  textInputAction: TextInputAction.next,
+                  validator: (a) {
+                    return Utils.isValidName(a, 'API Key', 5);
+                  },
+                ),
+                SizedBox(height: 32.h),
+                WorldStreetField(
+                  hintText: 'Binance Secret Key',
+                  textInputType: TextInputType.text,
+                  maxLines: 1,
+                  controller: secret,
                   textInputAction: TextInputAction.done,
+                  validator: (a) {
+                    return Utils.isValidName(a, 'Secret Key', 5);
+                  },
                 ),
                 SizedBox(height: 32.h),
                 GeneralButton(
@@ -75,7 +90,7 @@ class _AddBinanceScreenState extends State<AddBinanceScreen> {
                     setState(() {});
                     if (formKey.currentState!.validate()) {
                       Utils.offKeyboard();
-                      model.updateAccount(binance.text);
+                      model.updateAccount(secret.text, api.text);
                     }
                   },
                 ),

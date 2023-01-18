@@ -4,6 +4,7 @@ import 'package:ft_worldstreet/views/auth/onboard_view.dart';
 import 'package:ft_worldstreet/views/others/spaces_view.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
+import '../auth/select_space_view.dart';
 import '../others/profile_view.dart';
 import 'custom_text.dart';
 import 'floating_navbar.dart';
@@ -128,7 +129,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     }
                     if (name == 'Market API') {
                       Navigator.pop(cContext);
-                      //   push(context, const SelectSpaceScreen());
+                      push(context, const SelectSpaceScreen());
                       return;
                     }
                     if (name == 'Logout') {

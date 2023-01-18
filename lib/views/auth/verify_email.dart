@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ft_worldstreet/core/storage/local_storage.dart';
-import 'package:ft_worldstreet/views/auth/set_passcode.dart';
-import 'package:ft_worldstreet/views/widgets/utils.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../core/view_models/auth_vm.dart';
@@ -87,33 +85,34 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ],
               ),
               SizedBox(height: 30.h),
-              Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      model.resendEmail({'email': email});
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.email_outlined,
-                          color: AppColors.grey,
-                          size: 20.h,
-                        ),
-                        SizedBox(width: 8.h),
-                        RegularText(
-                          'Resend code',
-                          fontSize: 14.sp,
-                          fontFamily: 'Gilroy',
-                          color: AppColors.grey,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ],
+              if (!model.busy)
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        model.resendEmail({'email': email});
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.email_outlined,
+                            color: AppColors.grey,
+                            size: 20.h,
+                          ),
+                          SizedBox(width: 8.h),
+                          RegularText(
+                            'Resend code',
+                            fontSize: 14.sp,
+                            fontFamily: 'Gilroy',
+                            color: AppColors.grey,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
               SizedBox(height: 48.h),
               GeneralButton(
                 'Verify',
@@ -126,14 +125,12 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 busy: model.busy,
                 fontWeight: FontWeight.w600,
                 onPressed: () {
-                  push(context, SetPasscodeScreen());
-                  return;
                   if (controller.length != 6) {
                     showSnackBar(
                         context, 'Error', 'Enter the code sent to email');
                     return;
                   }
-                  model.resendEmail({'key': email});
+                  model.verifyEmail({'email': email, 'code': controller.text});
                 },
               ),
             ],

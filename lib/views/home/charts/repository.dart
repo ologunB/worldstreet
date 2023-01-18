@@ -10,11 +10,13 @@ class BinanceRepository {
     final uri =
         "https://api.binance.com/api/v3/klines?symbol=$symbol&interval=$interval${endTime != null ? "&endTime=$endTime" : ""}";
     final res = await Dio().get(uri);
-    return (jsonDecode(res.data) as List<dynamic>)
-        .map((e) => Candle.fromJson(e))
-        .toList()
-        .reversed
-        .toList();
+
+    List<Candle> list = [];
+    res.data.forEach((a) {
+      list.add(Candle.fromJson(a));
+    });
+
+    return list;
   }
 
   Future<List<String>> fetchSymbols() async {

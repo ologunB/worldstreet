@@ -50,6 +50,7 @@ class _LeadersViewState extends State<LeadersView> {
               itemBuilder: (c, i) {
                 return InkWell(
                   onTap: () {
+                    return;
                     push(context, const CopyLeaderView());
                   },
                   splashColor: Colors.white,
@@ -66,6 +67,7 @@ class _LeadersViewState extends State<LeadersView> {
   Widget leaderItem(int val) {
     return InkWell(
       onTap: () {
+        return;
         push(context, const CopyLeaderView());
       },
       splashColor: Colors.white,

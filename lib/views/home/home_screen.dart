@@ -1,556 +1,580 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/models/user_model.dart';
+import '../../core/view_models/auth_vm.dart';
+import '../leader/copy_leader_view.dart';
+import '../widgets/base_view.dart';
+import '../widgets/custom_text.dart';
+import '../widgets/utils.dart';
+import '../world_talk/notification_view.dart';
+import 'all_assets_view.dart';
+import 'all_traders_view.dart';
+import 'asset_details_view.dart';
+import 'main_layout.dart';
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-
   final currencyFormatter = NumberFormat.currency(locale: 'en_US', symbol: "");
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
-
-/*Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(
-              Icons.menu_rounded,
-              size: 24.h,
-              color: AppColors.skyBlue,
-            ),
-            onPressed: () => mainLayoutScaffoldKey.currentState!.openDrawer(),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu_rounded,
+            size: 24.h,
+            color: AppColors.skyBlue,
           ),
-          title: RegularText(
-            'Welcome to WorldStreet',
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w600,
-            color: AppColors.black,
-          ),
-          actions: [
-            InkWell(
-              onTap: () {
-                push(context, const NotificationsView());
-              },
-              child: Padding(
-                padding: EdgeInsets.only(right: 8.h),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/noti.png',
-                      height: 40.h,
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
+          onPressed: () => mainLayoutScaffoldKey.currentState!.openDrawer(),
         ),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10.0, right: 10),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 2,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.all(10),
-                        width: 320,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Colors.red,
-                          image: DecorationImage(
-                              image: AssetImage(
-                                homeScreenController.cardList[index],
-                              ),
-                              fit: BoxFit.cover),
+        title: RegularText(
+          'Welcome to WorldStreet',
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w600,
+          color: AppColors.black,
+        ),
+        actions: [
+          InkWell(
+            onTap: () {
+              push(context, const NotificationsView());
+            },
+            child: Padding(
+              padding: EdgeInsets.only(right: 8.h),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/icons/noti.png',
+                    height: 40.h,
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 24.h),
+        children: [
+          SizedBox(height: 10.h),
+          BaseView<AuthViewModel>(
+            onModelReady: (m) => m.getBalances(),
+            builder: (_, AuthViewModel coinModel, __) => coinModel.busy
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [CircularProgressIndicator(strokeWidth: 2)],
+                  )
+                : coinModel.balances == null
+                    ? Center(
+                        child: RegularText(
+                          coinModel.error!,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.red,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                "Crypto Market",
-                                style: const TextStyle(color: AppColors.white)
-                                    .normal12w400,
-                              ),
-                              const Spacer(),
-                              Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Total Balance",
-                                        style: const TextStyle(
-                                                color: AppColors.white)
-                                            .normal14w400,
-                                      ),
-                                      const SizedBox(
-                                        height: 14,
-                                      ),
-                                      index == 0
-                                          ? Obx(
-                                              () => Text(
-                                                "\$${globalController.binace}",
-                                                style: const TextStyle(
-                                                        color: AppColors.white)
-                                                    .normal32w600,
-                                              ),
-                                            )
-                                          : Text(
-                                              "\$0.00",
-                                              style: const TextStyle(
-                                                      color: AppColors.white)
-                                                  .normal32w600,
-                                            ),
-                                    ],
+                      )
+                    : Container(
+                        padding: EdgeInsets.all(24),
+                        decoration: BoxDecoration(
+                          color: AppColors.skyBlue,
+                          borderRadius: BorderRadius.circular(20.r),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 4,
+                              blurRadius: 10,
+                              offset: const Offset(
+                                  0, 1), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                RegularText(
+                                  'Total Balance',
+                                  fontSize: 14.sp,
+                                  color: AppColors.white,
+                                ),
+                                Spacer(),
+                                RegularText(
+                                  'Crypto Market',
+                                  fontSize: 14.sp,
+                                  color: AppColors.white,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 30.h),
+                            Row(
+                              children: [
+                                RegularText(
+                                  '\$${currencyFormatter.format(coinModel.totalBalance)}',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 32.sp,
+                                  color: AppColors.white,
+                                ),
+                                Spacer(),
+                                /*   Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 15.h),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(.36),
+                                    borderRadius: BorderRadius.circular(12.r),
                                   ),
-                                  const Spacer(),
-                                  Container(
-                                    width: 64,
-                                    height: 31,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white24,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            ImageConstant.uparrow,
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            "+15%",
-                                            style: const TextStyle(
-                                                    color: AppColors.white)
-                                                .normal14w400,
-                                          ),
-                                        ],
+                                  child: RegularText(
+                                    '+15%',
+                                    fontSize: 14.sp,
+                                    color: AppColors.white,
+                                  ),
+                                ),*/
+                              ],
+                            ),
+                            SizedBox(height: 30.h),
+                            Row(
+                              children: [
+                                RegularText(
+                                  '\$0.00 Today’s Profit',
+                                  fontSize: 14.sp,
+                                  color: AppColors.white,
+                                ),
+                                Spacer(),
+                                Icon(
+                                  Icons.more_horiz,
+                                  size: 30,
+                                  color: AppColors.white,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+          ),
+          SizedBox(height: 30.h),
+          BaseView<AuthViewModel>(
+            onModelReady: (m) => m.getCoins(),
+            builder: (_, AuthViewModel coinModel, __) => coinModel.busy
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [CircularProgressIndicator(strokeWidth: 2)],
+                  )
+                : coinModel.allCoins == null
+                    ? RegularText(
+                        'An error has occurred',
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.red,
+                      )
+                    : Column(
+                        children: [
+                          Row(
+                            children: [
+                              RegularText(
+                                'Assets',
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  push(
+                                      context,
+                                      AllAssetsView(
+                                          allCoins: coinModel.allCoins!));
+                                },
+                                child: RegularText(
+                                  'view all',
+                                  fontSize: 14.sp,
+                                  color: AppColors.skyBlue,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [0, 1, 2, 3, 4]
+                                  .map(
+                                    (i) => InkWell(
+                                      onTap: () {
+                                        push(
+                                            context,
+                                            AssetDetailsView(
+                                                model: coinModel.allCoins![i]));
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .6,
+                                        margin: EdgeInsets.only(
+                                            right: 20.h,
+                                            top: 16.h,
+                                            left: 10.h,
+                                            bottom: 24.h),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 18.h, vertical: 18.h),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20.r),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.2),
+                                              spreadRadius: 4,
+                                              blurRadius: 10,
+                                              offset: const Offset(0,
+                                                  1), // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    RegularText(
+                                                      coinModel
+                                                          .allCoins![i].name!,
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppColors.black,
+                                                    ),
+                                                    RegularText(
+                                                      coinModel
+                                                          .allCoins![i].symbol!
+                                                          .toUpperCase(),
+                                                      fontSize: 12.sp,
+                                                      color:
+                                                          AppColors.greyDark1,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Spacer(),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          38.h),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: coinModel
+                                                        .allCoins![i].image!,
+                                                    height: 36.h,
+                                                    width: 36.h,
+                                                    fit: BoxFit.fill,
+                                                    placeholder: (_, __) =>
+                                                        const SizedBox.shrink(),
+                                                    errorWidget: (_, __, ___) =>
+                                                        const SizedBox.shrink(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 34.h),
+                                            Row(
+                                              children: [
+                                                RegularText(
+                                                  '\$${currencyFormatter.format(coinModel.allCoins![i].currentPrice!)}',
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.black,
+                                                ),
+                                                Spacer(),
+                                                RegularText(
+                                                  '${currencyFormatter.format(coinModel.allCoins![i].priceChangePercentage24h!)}%',
+                                                  fontSize: 12.sp,
+                                                  color: AppColors.skyBlue,
+                                                ),
+                                                Icon(
+                                                  coinModel
+                                                          .allCoins![i]
+                                                          .priceChangePercentage24h!
+                                                          .isNegative
+                                                      ? Icons.arrow_drop_down
+                                                      : Icons.arrow_drop_up,
+                                                  color: coinModel
+                                                          .allCoins![i]
+                                                          .priceChangePercentage24h!
+                                                          .isNegative
+                                                      ? Colors.red
+                                                      : Colors.green,
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   )
-                                ],
+                                  .toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+          ),
+          SizedBox(height: 10.h),
+          BaseView<AuthViewModel>(
+            onModelReady: (m) => m.getAccounts(),
+            builder: (_, AuthViewModel usersModel, __) => usersModel.busy
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [CircularProgressIndicator(strokeWidth: 2)],
+                  )
+                : usersModel.accounts == null
+                    ? RegularText(
+                        'An error has occurred',
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.red,
+                      )
+                    : Column(
+                        children: [
+                          Row(
+                            children: [
+                              RegularText('Top traders',
+                                  fontSize: 20.sp, fontWeight: FontWeight.w600),
+                              Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  push(
+                                      context,
+                                      AllTradersView(
+                                          accounts: usersModel.accounts!));
+                                },
+                                child: RegularText(
+                                  'view all',
+                                  fontSize: 14.sp,
+                                  color: AppColors.skyBlue,
+                                ),
                               ),
-                              const Spacer(),
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    ImageConstant.cardarrow,
-                                    width: 15,
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    "\$1,816",
-                                    style:
-                                        const TextStyle(color: AppColors.white)
-                                            .normal14w400,
-                                  ),
-                                  Text(
-                                    "Today’s Profit",
-                                    style:
-                                        const TextStyle(color: AppColors.white)
-                                            .normal14w400,
-                                  ),
-                                  const Spacer(),
-                                  Image.asset(
-                                    ImageConstant.dote,
-                                    width: 20,
-                                    height: 10,
-                                  ),
-                                ],
-                              )
                             ],
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Assets",
-                        style: const TextStyle().normal20w600,
-                      ),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () {
-                          push(context, const AllAssetsView());
-                        },
-                        child: Text(
-                          "view all",
-                          style: const TextStyle(color: AppColors.skyBlue)
-                              .normal14w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Obx(
-                  () => globalController.cryptoModel.value.length > 1
-                      ? SizedBox(
-                          height: 150,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              physics: const BouncingScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount:
-                                  globalController.cryptoModel.value.length,
-                              itemBuilder: (context, index) {
-                                CryptoModal cryptoModal =
-                                    globalController.cryptoModel.value[index];
-                                return Container(
-                                  margin: const EdgeInsets.all(10),
-                                  height: 150,
-                                  width: 188,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.white,
-                                      borderRadius: BorderRadius.circular(15),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ]),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  cryptoModal.name!,
-                                                  style: const TextStyle()
-                                                      .normal14w500,
-                                                ),
-                                                Text(
-                                                  cryptoModal.short!,
-                                                  style: const TextStyle()
-                                                      .normal12w200,
-                                                )
-                                              ],
-                                            ),
-                                            const Spacer(),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[100],
-                                                borderRadius:
-                                                    BorderRadius.circular(40),
+                          SizedBox(height: 24.h),
+                          usersModel.accounts!.isEmpty
+                              ? RegularText(
+                                  'No ${usersModel.userType} is present currently',
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.skyBlue,
+                                )
+                              : ListView.builder(
+                                  itemCount: usersModel.accounts!.length > 3
+                                      ? 3
+                                      : usersModel.accounts!.length,
+                                  shrinkWrap: true,
+                                  physics: const ClampingScrollPhysics(),
+                                  itemBuilder: (c, i) {
+                                    User u = usersModel.accounts![i];
+                                    return Padding(
+                                      padding: EdgeInsets.only(bottom: 16.h),
+                                      child: InkWell(
+                                        onTap: () {
+                                          push(
+                                              context, CopyLeaderView(user: u));
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(18.h),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(20.r),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.2),
+                                                spreadRadius: 4,
+                                                blurRadius: 10,
+                                                offset: const Offset(0,
+                                                    1), // changes position of shadow
                                               ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(4.0),
-                                                child: Image.network(
-                                                  cryptoModal.image!,
-                                                  width: 30,
-                                                  height: 30,
-                                                ),
+                                            ],
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                'assets/icons/p${i % 3}.png',
+                                                height: 40.h,
+                                                width: 40.h,
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(width: 8.h),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  RegularText(
+                                                    u.email!,
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  SizedBox(height: 4.h),
+                                                  RegularText(
+                                                    '1st',
+                                                    fontSize: 12.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: AppColors.dGrey,
+                                                  ),
+                                                ],
+                                              ),
+                                              /*  SizedBox(width: 18.h),
+                                              Expanded(
+                                                  child: Image.asset(
+                                                      'assets/icons/line.png')),
+                                              SizedBox(width: 18.h),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  RegularText(
+                                                    '\$ 3,457',
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  SizedBox(height: 4.h),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      RegularText(
+                                                        '0,01%',
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: AppColors.dGrey,
+                                                      ),
+                                                      const Icon(
+                                                        Icons
+                                                            .arrow_drop_down_sharp,
+                                                        color: Colors.green,
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              )*/
+                                            ],
+                                          ),
                                         ),
-                                        const Spacer(),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "\$${currencyFormatter.format(double.parse(cryptoModal.price!))}",
-                                              style: const TextStyle()
-                                                  .normal20w600,
-                                            ),
-                                            const Spacer(),
-                                            Text(
-                                              "${double.parse(cryptoModal.percentage!).toStringAsFixed(2)}% ^",
-                                              style: const TextStyle(
-                                                      color: AppColors.skyBlue)
-                                                  .normal12w400,
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }),
-                        )
-                      : const Center(
-                          child: Text("Loading"),
-                        ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Top traders",
-                        style: const TextStyle().normal20w600,
-                      ),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () {
-                          push(context, const AllTradersView());
-                        },
-                        child: Text(
-                          "view all",
-                          style: const TextStyle(color: AppColors.skyBlue)
-                              .normal14w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: context.width,
-                  height: 200,
-                  child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: false,
-                      itemCount: 2,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.all(10),
-                          height: 72,
-                          decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ]),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.pink,
-                                    borderRadius: BorderRadius.circular(30),
-                                    image: DecorationImage(
-                                        image: AssetImage(homeScreenController
-                                            .profileImageList[index]),
-                                        fit: BoxFit.cover),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Daniel435",
-                                      style: const TextStyle().normal16w600,
-                                    ),
-                                    const Spacer(),
-                                    Text(
-                                      "1st",
-                                      style: const TextStyle().normal12w200,
-                                    )
-                                  ],
-                                ),
-                                const Spacer(),
-                                Image.asset(
-                                  ImageConstant.graph,
-                                  width: 80,
-                                ),
-                                const Spacer(),
-                                Column(
-                                  children: [
-                                    Text(
-                                      "\$3,457",
-                                      style: const TextStyle().normal16w600,
-                                    ),
-                                    const Spacer(),
-                                    Text(
-                                      "0.01^",
-                                      style: const TextStyle(
-                                              color: AppColors.greenUnread)
-                                          .normal12w200,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Trending on WorldTalk",
-                        style: const TextStyle().normal20w600,
-                      ),
-                      const Spacer(),
-                      Text(
-                        "view all",
-                        style: const TextStyle(color: AppColors.skyBlue)
-                            .normal14w400,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 170,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: homeScreenController.rewardImageList.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.all(10),
-                          width: 180,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                                image: AssetImage(homeScreenController
-                                    .rewardImageList[index]),
-                                fit: BoxFit.cover),
-                          ),
-                        );
-                      }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Copy traders",
-                        style: const TextStyle().normal20w600,
-                      ),
-                      const Spacer(),
-                      Text(
-                        "view all",
-                        style: const TextStyle(color: AppColors.skyBlue)
-                            .normal14w400,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 150,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: homeScreenController.profileImageList.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: const EdgeInsets.all(10),
-                          height: 150,
-                          width: 188,
-                          decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ]),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Daniel435",
-                                          style: const TextStyle().normal14w500,
-                                        ),
-                                        Text(
-                                          "ETH",
-                                          style: const TextStyle().normal12w200,
-                                        )
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[100],
-                                        borderRadius: BorderRadius.circular(40),
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                homeScreenController
-                                                    .profileImageList[index]),
-                                            fit: BoxFit.cover),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "1,132,151",
-                                      style: const TextStyle().normal20w600,
-                                    ),
-                                    const Spacer(),
-                                    Text(
-                                      "2.35% ^",
-                                      style: const TextStyle(
-                                              color: AppColors.skyBlue)
-                                          .normal12w400,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
+                                    );
+                                  }),
+                        ],
+                      ),
+          ),
+          /*   Row(
+            children: [
+              RegularText(
+                'Traders profile',
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+              ),
+              Spacer(),
+              InkWell(
+                onTap: () {
+                  push(context, AllTradersView());
+                },
+                child: RegularText(
+                  'view all',
+                  fontSize: 14.sp,
+                  color: AppColors.skyBlue,
                 ),
-                SizedBox(height: 100),
-              ],
+              ),
+            ],
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [1, 2, 3]
+                  .map(
+                    (e) => Container(
+                      width: MediaQuery.of(context).size.width * .6,
+                      margin: EdgeInsets.only(
+                          right: 20.h, top: 16.h, bottom: 24.h, left: 10.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 18.h, vertical: 18.h),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 4,
+                            blurRadius: 10,
+                            offset: const Offset(
+                                0, 1), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RegularText(
+                                    'Daniel435',
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.black,
+                                  ),
+                                  RegularText(
+                                    'ETH',
+                                    fontSize: 12.sp,
+                                    color: AppColors.lightGrey,
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30.h),
+                                child: Image.asset(
+                                  'assets/icons/p1.png',
+                                  height: 36.h,
+                                  width: 36.h,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 34.h),
+                          Row(
+                            children: [
+                              RegularText(
+                                '1,132,151',
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.black,
+                              ),
+                              Spacer(),
+                              RegularText(
+                                '2,35%',
+                                fontSize: 12.sp,
+                                color: AppColors.skyBlue,
+                              ),
+                              Icon(
+                                Icons.arrow_drop_down,
+                                color: AppColors.skyBlue,
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
           ),
-        )
-
-        //Deawer
-
-        );*/
+          SizedBox(height: 100.h),*/
+        ],
+      ),
+    );
+  }
+}

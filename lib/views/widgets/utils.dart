@@ -59,8 +59,8 @@ class Utils {
       return '$type cannot be Empty';
     } else if (value.length < length) {
       return '$type is too short';
-    } else if (value.length > 50) {
-      return '$type max length is 50';
+    } else if (value.length > 100) {
+      return '$type max length is 100';
     }
     return null;
   }
