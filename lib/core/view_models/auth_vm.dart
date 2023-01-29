@@ -9,8 +9,8 @@ import 'package:ft_worldstreet/views/home/search_country.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
 import '../../locator.dart';
-import '../../utils/color_schema.dart';
 import '../../views/auth/reset_pass2_view.dart';
+import '../../views/widgets/color_schema.dart';
 import '../../views/widgets/snackbar.dart';
 import '../apis/auth_api.dart';
 import '../apis/base_api.dart';

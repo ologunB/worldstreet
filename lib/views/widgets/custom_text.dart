@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
-export 'package:ft_worldstreet/utils/color_schema.dart';
+export 'package:ft_worldstreet/views/widgets/color_schema.dart';
 
 class RegularText extends StatelessWidget {
   const RegularText(
