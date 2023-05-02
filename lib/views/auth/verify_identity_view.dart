@@ -5,7 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/utils.dart';
-import 'add_faceid_view.dart';
 import 'choose_country_view.dart';
 
 class VerifyIdentityScreen extends StatefulWidget {
@@ -56,7 +55,6 @@ class _VerifyIdentityScreenState extends State<VerifyIdentityScreen> {
                 await _picker.pickImage(source: ImageSource.gallery);
 
             if (image != null) {
-              push(context, AddFaceIDScreen());
             } else {
               // User canceled the picker
             }

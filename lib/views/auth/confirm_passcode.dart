@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:ft_worldstreet/views/auth/add_faceid_view.dart';
 import 'package:ft_worldstreet/views/auth/select_space_view.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +21,6 @@ class _ConfirmPasscodeScreenState extends State<ConfirmPasscodeScreen> {
 
   @override
   void initState() {
-    _checkBiometrics();
     super.initState();
   }
 
@@ -100,40 +96,13 @@ class _ConfirmPasscodeScreenState extends State<ConfirmPasscodeScreen> {
                   return;
                 }
                 vm.setPasscode(controller.text);
-                if (canCheckBiometrics) {
-                  pushReplacement(context, AddFaceIDScreen());
-                } else {
-                  pushReplacement(context, SelectSpaceScreen());
-                }
+
+                pushReplacement(context, SelectSpaceScreen());
               },
             ),
           ],
         ),
       ),
     );
-  }
-
-  bool canCheckBiometrics = false;
-  final LocalAuthentication auth = LocalAuthentication();
-  List<BiometricType> availableBiometrics = [];
-
-  Future<void> _checkBiometrics() async {
-    try {
-      canCheckBiometrics =
-          (await auth.canCheckBiometrics && await auth.isDeviceSupported());
-    } on PlatformException catch (e) {
-      print(e);
-    }
-
-    if (canCheckBiometrics) {
-      try {
-        availableBiometrics = await auth.getAvailableBiometrics();
-      } on PlatformException catch (e) {
-        print(e);
-      }
-    }
-    canCheckBiometrics = canCheckBiometrics && availableBiometrics.isNotEmpty;
-
-    setState(() {});
   }
 }
