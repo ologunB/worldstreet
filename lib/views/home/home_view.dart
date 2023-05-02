@@ -3,6 +3,7 @@ import 'package:ft_worldstreet/views/home/request_money_view.dart';
 import 'package:ft_worldstreet/views/settings/edit_account_view.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
+import '../transfers/enter_amount_view.dart';
 import '../widgets/custom_text.dart';
 import 'exchange_view.dart';
 import 'fund_account_view.dart';
@@ -221,7 +222,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void doTransfer() {
-    // push(context, LocalTransfersScreen());
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.h),
+        ),
+        builder: (a) {
+          return SelectTransfer();
+        });
   }
 }
 
@@ -314,4 +324,78 @@ class _SelectAccountState extends State<SelectAccount> {
   List<String> get b =>
       ['NG Naira', 'US Dollar', 'British Pounds', 'Euro', 'China Yaun'];
   List<String> get c => ['₦', '\$', '£', '€', '¥'];
+}
+
+class SelectTransfer extends StatefulWidget {
+  const SelectTransfer({Key? key}) : super(key: key);
+
+  @override
+  State<SelectTransfer> createState() => _SelectTransferState();
+}
+
+class _SelectTransferState extends State<SelectTransfer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      margin: EdgeInsets.symmetric(horizontal: 10.h),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12.h),
+          topRight: Radius.circular(12.h),
+        ),
+      ),
+      child: ListView.builder(
+          itemCount: 2,
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemBuilder: (_, i) {
+            return Padding(
+              padding: EdgeInsets.only(bottom: 11.h),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                  push(context, EnterAmountScreen(type: i));
+                },
+                child: Container(
+                  padding: EdgeInsets.all(8.h),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.h),
+                      border: Border.all(color: Colors.black.withOpacity(.5))),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/icons/l$i.png', height: 60.h),
+                      SizedBox(width: 10.h),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 12.h),
+                          RegularText(
+                            a[i],
+                            fontSize: 18.sp,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w800,
+                          ),
+                          SizedBox(height: 4.h),
+                          RegularText(
+                            b[i],
+                            fontSize: 18.sp,
+                            color: Colors.black.withOpacity(.5),
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }),
+    );
+  }
+
+  List<String> get a => ['Transfer to Local banks', 'Transfer with Username'];
+  List<String> get b => ['Local bank transfers', 'Transfer to another user'];
 }
