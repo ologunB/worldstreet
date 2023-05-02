@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:ft_worldstreet/core/view_models/auth_vm.dart';
 import 'package:provider/provider.dart';
 
-import '../home/search_country.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_textfield.dart';
+import '../widgets/search_country.dart';
 import '../widgets/utils.dart';
 import 'signup_view.dart';
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ft_worldstreet/views/auth/signup_view.dart';
 
 import '../../core/view_models/auth_vm.dart';
 import '../widgets/base_view.dart';
@@ -6,7 +7,6 @@ import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/utils.dart';
-import 'choose_country_view.dart';
 import 'reset_pass_view.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      push(context, ChooseCountryScreen());
+                      push(context, SignupScreen());
                     },
                     child: RegularText(
                       'Register Now',
@@ -60,6 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ListView(
               padding: EdgeInsets.all(24.h),
               children: [
+                SizedBox(height: 30.h),
                 RegularText(
                   'Welcome Back',
                   fontSize: 24.sp,

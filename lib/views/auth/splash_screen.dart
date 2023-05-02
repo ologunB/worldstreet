@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ft_worldstreet/views/home/main_layout.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
 import '../../core/storage/local_storage.dart';
+import '../main_layout.dart';
 import 'add_binance_view.dart';
-import 'onboard_view.dart';
+import 'login_view.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(Duration(seconds: 2), () {
       if (AppCache.getUser() == null) {
-        pushReplacement(context, OnboardView());
+        pushReplacement(context, LoginScreen());
       } else if (AppCache.getUser()?.binanceKey == null) {
         pushReplacement(context, AddBinanceScreen());
       } else {

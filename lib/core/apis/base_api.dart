@@ -1,3 +1,4 @@
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
@@ -7,7 +8,7 @@ class BaseAPI {
   Dio dio() {
     Dio dio = Dio(
       BaseOptions(
-        baseUrl: 'https://worldstreet-backend.onrender.com/',
+        baseUrl: 'http://191.101.2.51:8000/',
         sendTimeout: 50000,
         connectTimeout: 50000,
         receiveTimeout: 50000,
@@ -19,6 +20,12 @@ class BaseAPI {
         },
       ),
     );
+
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
+      client.badCertificateCallback = (cert, host, port) => true;
+      return client;
+    };
 
     return dio;
   }

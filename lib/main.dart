@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ft_worldstreet/views/auth/splash_screen.dart';
+import 'package:ft_worldstreet/views/main_layout.dart';
 import 'package:provider/provider.dart';
 
 import 'core/storage/local_storage.dart';
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, builder) => MaterialApp(
-          home: SplashScreen(),
+          home: MainLayout(),
           navigatorKey: AppNavigator.navKey,
           debugShowCheckedModeBanner: false,
         ),

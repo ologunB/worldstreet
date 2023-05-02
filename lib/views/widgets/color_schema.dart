@@ -17,5 +17,5 @@ abstract class AppColors {
   static const skyBlue = Color(0xff1389DF);
   static const grey = Color(0xff999999);
   static const lightGrey = Color(0xffE8ECF4);
-  static const baground = Color(0xffE5E5E5);
+  static const baground = Color(0xffEDF0F4);
 }

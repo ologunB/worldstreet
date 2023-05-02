@@ -4,12 +4,12 @@ import 'package:ft_worldstreet/core/storage/local_storage.dart';
 import 'package:ft_worldstreet/views/auth/login_view.dart';
 import 'package:ft_worldstreet/views/auth/set_passcode.dart';
 import 'package:ft_worldstreet/views/auth/verify_email.dart';
-import 'package:ft_worldstreet/views/home/main_layout.dart';
-import 'package:ft_worldstreet/views/home/search_country.dart';
+import 'package:ft_worldstreet/views/widgets/search_country.dart';
 import 'package:ft_worldstreet/views/widgets/utils.dart';
 
 import '../../locator.dart';
 import '../../views/auth/reset_pass2_view.dart';
+import '../../views/main_layout.dart';
 import '../../views/widgets/color_schema.dart';
 import '../../views/widgets/snackbar.dart';
 import '../apis/auth_api.dart';

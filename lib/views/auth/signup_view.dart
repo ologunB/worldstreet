@@ -4,10 +4,8 @@ import 'package:provider/provider.dart';
 import '../../core/view_models/auth_vm.dart';
 import '../widgets/base_view.dart';
 import '../widgets/custom_button.dart';
-import '../widgets/custom_drop_down.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_textfield.dart';
-import '../widgets/snackbar.dart';
 import '../widgets/utils.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -19,7 +17,6 @@ class SignupScreen extends StatefulWidget {
 
 // kivale@brand-app.biz
 class _SignupScreenState extends State<SignupScreen> {
-  String? type;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool hidePassword = true;
   TextEditingController email = TextEditingController();
@@ -45,12 +42,12 @@ class _SignupScreenState extends State<SignupScreen> {
               padding: EdgeInsets.all(24.h),
               children: [
                 RegularText(
-                  'Continue registration',
+                  'Start registration',
                   fontSize: 24.sp,
                   fontFamily: 'Gilroy',
                   fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 17.h),
+                SizedBox(height: 12.h),
                 RegularText(
                   'Enter the necessary details',
                   fontSize: 14.sp,
@@ -58,14 +55,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   color: AppColors.grey,
                 ),
                 SizedBox(height: 24.h),
-                CustomDropDownButton(
-                  list: ['Staker', 'Trader'],
-                  value: type,
-                  hintText: 'User Type',
-                  onChanged: (a) {
-                    type = a;
-                    setState(() {});
-                  },
+                WorldStreetField(
+                  hintText: 'Full Name',
+                  textInputType: TextInputType.emailAddress,
+                  maxLines: 1,
+                  validator: Utils.validateEmail,
+                  controller: email,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 16.h),
                 WorldStreetField(
@@ -141,6 +137,15 @@ class _SignupScreenState extends State<SignupScreen> {
                     return null;
                   },
                 ),
+                SizedBox(height: 16.h),
+                WorldStreetField(
+                  hintText: 'Phone Number',
+                  textInputType: TextInputType.number,
+                  maxLines: 1,
+                  validator: Utils.validateEmail,
+                  controller: email,
+                  textInputAction: TextInputAction.next,
+                ),
                 SizedBox(height: 32.h),
                 GeneralButton(
                   'Signup',
@@ -153,16 +158,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   textColor: AppColors.white,
                   fontWeight: FontWeight.w600,
                   onPressed: () {
-                    if (type == null) {
-                      showSnackBar(context, 'Error', 'Choose User Type');
-                      return;
-                    }
                     autoValidate = true;
                     setState(() {});
                     if (formKey.currentState!.validate()) {
                       Utils.offKeyboard();
                       Map<String, dynamic> userData = {
-                        'user_type': type,
+                        'user_type': 'type',
                         'password1': password.text,
                         'password2': password.text,
                         'country':
