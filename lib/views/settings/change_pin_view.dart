@@ -36,10 +36,10 @@ class _ChangePINScreenState extends State<ChangePINScreen> {
         centerTitle: true,
         title: RegularText(
           'Change PIN',
-          fontSize: 24.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
         ),
       ),
       body: ListView(

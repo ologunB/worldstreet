@@ -20,14 +20,14 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
         padding: EdgeInsets.all(24.h),
         color: AppColors.baground,
         child: GeneralButton(
-          'Confirm',
+          'Transfer',
           buttonColor: AppColors.skyBlue,
           borderColor: AppColors.skyBlue,
           borderRadius: 8.h,
           fontSize: 18.sp,
           height: 50.h,
           textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           onPressed: () {
             showModalBottomSheet(
                 context: context,
@@ -49,14 +49,14 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        SizedBox(height: 14.h),
                         Image.asset('assets/icons/flare.png', height: 56.h),
                         SizedBox(height: 14.h),
                         RegularText(
                           '10,000 NGN has been sent to\nBode Thomas Jolaoso',
-                          fontSize: 18.sp,
-                          color: Colors.black.withOpacity(.6),
+                          fontSize: 16.sp,
+                          color: AppColors.grey,
                           textAlign: TextAlign.center,
-                          fontWeight: FontWeight.w500,
                         ),
                         SizedBox(height: 27.h),
                         GeneralButton(
@@ -67,11 +67,12 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
                           fontSize: 16.sp,
                           height: 48.h,
                           textColor: AppColors.white,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           onPressed: () {
                             Navigator.pop(context);
                           },
                         ),
+                        SizedBox(height: 14.h),
                       ],
                     ),
                   );
@@ -86,10 +87,10 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
         centerTitle: true,
         title: RegularText(
           'Transfer Money',
-          fontSize: 24.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
         ),
       ),
       body: ListView(
@@ -98,34 +99,34 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
           CircleAvatar(
             radius: 28.h,
             backgroundColor: Color(0xff291CC0),
-            child: RegularText(
-              'E',
-              fontSize: 32.sp,
-              textAlign: TextAlign.center,
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
+            child: Image.asset('assets/icons/person.png'),
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 12.h),
           RegularText(
             'Emmanuel Omale',
-            fontSize: 14.sp,
+            fontSize: 16.sp,
             textAlign: TextAlign.center,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
-          SizedBox(height: 6.h),
+          SizedBox(height: 4.h),
           RegularText(
             '@emmanuelO',
-            fontSize: 14.sp,
+            fontSize: 12.sp,
             textAlign: TextAlign.center,
-            fontWeight: FontWeight.w600,
-            color: AppColors.greyDark1,
+            color: AppColors.grey,
           ),
           SizedBox(height: 24.h),
           Container(
-            padding: EdgeInsets.all(24.h),
+            padding: EdgeInsets.symmetric(horizontal: 22.h, vertical: 35.h),
             decoration: BoxDecoration(
               color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(.05),
+                  blurRadius: 3,
+                  spreadRadius: 3,
+                )
+              ],
               borderRadius: BorderRadius.circular(8.h),
             ),
             child: Column(
@@ -139,13 +140,13 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
                       RegularText(
                         'Recipient Gets',
                         fontSize: 14.sp,
-                        color: Colors.black.withOpacity(.6),
-                        fontWeight: FontWeight.w600,
+                        color: AppColors.grey,
+                        fontWeight: FontWeight.w500,
                       ),
                       Spacer(),
                       RegularText(
                         '10,000 NGN',
-                        fontSize: 14.sp,
+                        fontSize: 16.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
@@ -159,13 +160,13 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
                       RegularText(
                         'Fees',
                         fontSize: 14.sp,
-                        color: Colors.black.withOpacity(.6),
-                        fontWeight: FontWeight.w600,
+                        color: AppColors.grey,
+                        fontWeight: FontWeight.w500,
                       ),
                       Spacer(),
                       RegularText(
                         'None',
-                        fontSize: 14.sp,
+                        fontSize: 16.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
@@ -177,13 +178,13 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
                     RegularText(
                       'Arriving',
                       fontSize: 14.sp,
-                      color: Colors.black.withOpacity(.6),
-                      fontWeight: FontWeight.w600,
+                      color: AppColors.grey,
+                      fontWeight: FontWeight.w500,
                     ),
                     Spacer(),
                     RegularText(
                       'Instant',
-                      fontSize: 14.sp,
+                      fontSize: 16.sp,
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
                     ),
@@ -194,11 +195,10 @@ class _CompleteTransferScreenState extends State<CompleteTransferScreen> {
           ),
           SizedBox(height: 20.h),
           WorldStreetField(
-            labelText: 'Note (Optional)',
+            hintText: 'Note (Optional)',
             textInputType: TextInputType.text,
             maxLines: 3,
-            removeOutline: true,
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
           ),
         ],
       ),

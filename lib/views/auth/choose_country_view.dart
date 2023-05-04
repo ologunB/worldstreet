@@ -3,15 +3,11 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ft_worldstreet/core/view_models/auth_vm.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/search_country.dart';
-import '../widgets/utils.dart';
-import 'signup_view.dart';
 
 class ChooseCountryScreen extends StatefulWidget {
   const ChooseCountryScreen({Key? key}) : super(key: key);
@@ -66,9 +62,7 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
           onPressed: selectedCountry == null
               ? null
               : () {
-                  context.read<AuthViewModel>().selectedCountry =
-                      selectedCountry;
-                  push(context, SignupScreen());
+                  Navigator.pop(context, selectedCountry);
                 },
         ),
       ),
@@ -141,6 +135,7 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
                       child: InkWell(
                         onTap: () {
                           selectedCountry = country;
+
                           setState(() {});
                         },
                         child: Container(

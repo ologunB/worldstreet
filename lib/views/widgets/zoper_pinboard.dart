@@ -10,7 +10,7 @@ class PinKeyboard extends StatefulWidget {
   final VoidCallback? onBiometric;
 
   const PinKeyboard({
-    this.space = 60,
+    this.space = 50,
     this.length = 4,
     this.onChange,
     this.onConfirm,
@@ -138,10 +138,6 @@ class _PinKeyboardState extends State<PinKeyboard> {
     }
   }
 
-  void _handleTabBiometric() {
-    if (widget.onBiometric != null) widget.onBiometric!();
-  }
-
   void _handleTabBackspace() {
     if (_pinCode.length > 0) {
       _pinCode = _pinCode.substring(0, _pinCode.length - 1);
@@ -152,18 +148,7 @@ class _PinKeyboardState extends State<PinKeyboard> {
   }
 
   Widget _createBiometricIcon() {
-    return _createImage(
-      widget.onBiometric == null
-          ? SizedBox()
-          : Container(
-              height: widget.space.h,
-              width: widget.space.h,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [Icon(Icons.keyboard_arrow_down_rounded, size: 24.h)],
-              )),
-      _handleTabBiometric,
-    );
+    return SizedBox(width: 50.h);
   }
 
   Widget _createBackspaceIcon() {
@@ -173,7 +158,7 @@ class _PinKeyboardState extends State<PinKeyboard> {
         width: widget.space.h,
         child: Icon(
           Icons.backspace_outlined,
-          size: 26.h,
+          size: 20.h,
           color: AppColors.black,
         ),
       ),

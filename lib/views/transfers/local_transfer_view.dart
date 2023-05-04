@@ -29,7 +29,7 @@ class _LocalTransfersScreenState extends State<LocalTransfersScreen> {
           fontSize: 18.sp,
           height: 50.h,
           textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
         ),
       ),
       appBar: AppBar(
@@ -39,10 +39,10 @@ class _LocalTransfersScreenState extends State<LocalTransfersScreen> {
         centerTitle: true,
         title: RegularText(
           'Account details',
-          fontSize: 24.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
         ),
       ),
       body: ListView(
@@ -54,24 +54,27 @@ class _LocalTransfersScreenState extends State<LocalTransfersScreen> {
               push(context, BeneficiaryScreen());
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 8.h),
+              padding: EdgeInsets.symmetric(horizontal: 17.h, vertical: 11.h),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.h)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12.h),
+                border: Border.all(
+                  color: Color(0xffCDCDCD),
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RegularText(
                     'Beneficiaries',
-                    fontSize: 24.sp,
-                    color: Colors.black.withOpacity(.6),
-                    fontWeight: FontWeight.w800,
+                    fontSize: 16.sp,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
                   ),
                   RegularText(
                     'Send to already saved channels',
-                    fontSize: 16.sp,
-                    color: Colors.black.withOpacity(.6),
-                    fontWeight: FontWeight.w600,
+                    fontSize: 12.sp,
+                    color: AppColors.grey,
                   ),
                 ],
               ),
@@ -81,7 +84,6 @@ class _LocalTransfersScreenState extends State<LocalTransfersScreen> {
           WorldStreetField(
             labelText: 'Bank',
             maxLines: 1,
-            removeOutline: true,
             readOnly: true,
             suffixIcon: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -94,7 +96,6 @@ class _LocalTransfersScreenState extends State<LocalTransfersScreen> {
             textInputType: TextInputType.number,
             maxLines: 1,
             maxLength: 10,
-            removeOutline: true,
             textInputAction: TextInputAction.next,
           ),
           SizedBox(height: 16.h),
@@ -103,7 +104,6 @@ class _LocalTransfersScreenState extends State<LocalTransfersScreen> {
             textInputType: TextInputType.text,
             maxLines: 1,
             readOnly: true,
-            removeOutline: true,
             textInputAction: TextInputAction.next,
           ),
           SizedBox(height: 16.h),

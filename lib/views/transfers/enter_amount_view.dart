@@ -32,7 +32,7 @@ class _EnterAmountScreenState extends State<EnterAmountScreen> {
           fontSize: 18.sp,
           height: 50.h,
           textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           onPressed: () {
             if (widget.type == 0) {
               push(context, LocalTransfersScreen());
@@ -49,54 +49,57 @@ class _EnterAmountScreenState extends State<EnterAmountScreen> {
         centerTitle: true,
         title: RegularText(
           'Transfer Money',
-          fontSize: 24.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
         ),
       ),
       body: ListView(
         padding: EdgeInsets.all(24.h),
         children: [
-          field('You‘re Sending'),
-          SizedBox(height: 6.h),
-          RegularText(
-            'Your NGN Balance is 760,000',
-            fontSize: 12.sp,
-            color: Colors.black.withOpacity(.5),
-            fontWeight: FontWeight.w700,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              RegularText(
+                'Balance: ',
+                fontSize: 14.sp,
+                color: AppColors.grey,
+                fontWeight: FontWeight.w500,
+              ),
+              RegularText(
+                '₦760,000',
+                fontSize: 14.sp,
+                color: Color(0xff23845B),
+                fontWeight: FontWeight.w600,
+              ),
+            ],
           ),
+          SizedBox(height: 6.h),
+          field('You Pay'),
           SizedBox(height: 18.h),
           Row(
             children: [
-              CircleAvatar(
-                radius: 10.h,
-                backgroundColor: Color(0xff6BF581),
-                child: Icon(Icons.add_rounded, size: 16.h),
-              ),
+              Image.asset('assets/icons/e1.png', height: 30.h),
               SizedBox(width: 10.h),
               RegularText(
                 'No fees',
                 fontSize: 14.sp,
-                color: Colors.black.withOpacity(.5),
-                fontWeight: FontWeight.w700,
+                color: AppColors.grey,
+                fontWeight: FontWeight.w500,
               ),
             ],
           ),
           SizedBox(height: 18.h),
           Row(
             children: [
-              CircleAvatar(
-                radius: 10.h,
-                backgroundColor: Color(0xff6BF581),
-                child: Icon(Icons.add_rounded, size: 16.h),
-              ),
+              Image.asset('assets/icons/e1.png', height: 30.h),
               SizedBox(width: 10.h),
               RegularText(
                 'Instant',
                 fontSize: 14.sp,
-                color: Colors.black.withOpacity(.5),
-                fontWeight: FontWeight.w700,
+                color: AppColors.grey,
+                fontWeight: FontWeight.w500,
               ),
             ],
           ),
@@ -109,7 +112,7 @@ class _EnterAmountScreenState extends State<EnterAmountScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 4.h),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(.2),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10.h),
         border: Border.all(
           color: Colors.black.withOpacity(.5),
@@ -153,8 +156,8 @@ class _EnterAmountScreenState extends State<EnterAmountScreen> {
                 RegularText(
                   type,
                   fontSize: 14.sp,
-                  color: Colors.black.withOpacity(.5),
-                  fontWeight: FontWeight.w700,
+                  color: AppColors.grey,
+                  fontWeight: FontWeight.w500,
                 ),
                 CupertinoTextField(
                   decoration: BoxDecoration(color: Colors.transparent),

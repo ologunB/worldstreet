@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
-import '../widgets/custom_textfield.dart';
+import '../widgets/flutter_masked_text.dart';
 
 class AddFundCreateCardScreen extends StatefulWidget {
   const AddFundCreateCardScreen({Key? key}) : super(key: key);
@@ -13,22 +15,31 @@ class AddFundCreateCardScreen extends StatefulWidget {
 }
 
 class _AddFundCreateCardScreenState extends State<AddFundCreateCardScreen> {
+  MoneyMaskedTextController amount = MoneyMaskedTextController(
+    decimalSeparator: ".",
+    thousandSeparator: ",",
+    initialValue: 0.00,
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.baground,
-      bottomNavigationBar: Padding(
+      bottomSheet: Container(
+        color: Colors.white,
         padding: EdgeInsets.all(24.h),
         child: GeneralButton(
           'Create Card',
           buttonColor: AppColors.skyBlue,
           borderColor: AppColors.skyBlue,
           borderRadius: 8.h,
-          fontSize: 18.sp,
+          fontSize: 16.sp,
           height: 50.h,
           textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
-          onPressed: () {},
+          fontWeight: FontWeight.w500,
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
         ),
       ),
       appBar: AppBar(
@@ -38,48 +49,54 @@ class _AddFundCreateCardScreenState extends State<AddFundCreateCardScreen> {
         centerTitle: true,
         title: RegularText(
           'Create Card',
-          fontSize: 17.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w500,
         ),
       ),
       body: ListView(
         padding: EdgeInsets.all(24.h),
         children: [
-          WorldStreetField(
-            textInputType: TextInputType.number,
-            maxLines: 1,
-            fontSize: 20.sp,
-            prefixIcon: Padding(
-              padding: EdgeInsets.only(left: 30.h, right: 12.h),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.asset('assets/icons/us.png', height: 30.h),
-                      SizedBox(width: 4.h),
-                      RegularText(
-                        'USD',
-                        fontSize: 20.sp,
-                        color: Colors.black,
-                        textAlign: TextAlign.center,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ],
-                  )
-                ],
-              ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 17.h, vertical: 17.h),
+            decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(12.h),
+                border: Border.all(color: AppColors.dGrey)),
+            child: Row(
+              children: [
+                Image.asset('assets/icons/us.png', height: 30.h),
+                SizedBox(width: 8.h),
+                RegularText(
+                  'USD',
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.black,
+                ),
+                SizedBox(width: 8.h),
+                Expanded(
+                  child: CupertinoTextField(
+                    decoration: BoxDecoration(color: Colors.transparent),
+                    keyboardType: TextInputType.number,
+                    maxLines: 1,
+                    controller: amount,
+                    textInputAction: TextInputAction.done,
+                    style: GoogleFonts.poppins(
+                      color: AppColors.black,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )
+              ],
             ),
-            textInputAction: TextInputAction.next,
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 24.h),
           RegularText(
-            'You must have a minimum of \$5 in your USD Wallet',
-            fontSize: 13.sp,
-            color: Colors.black.withOpacity(.6),
+            'You must have a minimum of \$5 in your USD account',
+            fontSize: 14.sp,
+            color: AppColors.greyDark1,
             fontWeight: FontWeight.w500,
           ),
         ],

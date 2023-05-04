@@ -19,14 +19,14 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.all(24.h),
         child: GeneralButton(
-          'Exchange',
+          'Continue',
           buttonColor: AppColors.skyBlue,
           borderColor: AppColors.skyBlue,
           borderRadius: 8.h,
-          fontSize: 18.sp,
+          fontSize: 16.sp,
           height: 50.h,
           textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           onPressed: () {
             showModalBottomSheet(
                 context: context,
@@ -48,22 +48,22 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        SizedBox(height: 14.h),
                         Image.asset('assets/icons/flare.png', height: 56.h),
                         SizedBox(height: 14.h),
                         RegularText(
                           r'$5.00',
-                          fontSize: 22.sp,
+                          fontSize: 20.sp,
                           color: Colors.black,
                           textAlign: TextAlign.center,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w600,
                         ),
                         SizedBox(height: 10.h),
                         RegularText(
                           'was added from your USD balance in\n exchange for N3,900.00',
-                          fontSize: 18.sp,
-                          color: Colors.black.withOpacity(.6),
+                          fontSize: 16.sp,
+                          color: AppColors.grey,
                           textAlign: TextAlign.center,
-                          fontWeight: FontWeight.w500,
                         ),
                         SizedBox(height: 27.h),
                         GeneralButton(
@@ -74,11 +74,12 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                           fontSize: 16.sp,
                           height: 48.h,
                           textColor: AppColors.white,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           onPressed: () {
                             Navigator.pop(context);
                           },
                         ),
+                        SizedBox(height: 14.h),
                       ],
                     ),
                   );
@@ -93,10 +94,10 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
         centerTitle: true,
         title: RegularText(
           'Review details',
-          fontSize: 24.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
         ),
       ),
       body: ListView(
@@ -108,46 +109,46 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
               children: [
                 TextSpan(
                   text: 'You are initiating a currency exchange from your',
-                  style: GoogleFonts.inter(
+                  style: GoogleFonts.poppins(
                     height: 1.5,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
                     color: Colors.black.withOpacity(.6),
                   ),
                 ),
                 TextSpan(
                   text: ' NGN balance ',
-                  style: GoogleFonts.inter(
-                    fontSize: 18.sp,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14.sp,
                     height: 1.5,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black.withOpacity(.6),
                   ),
                 ),
                 TextSpan(
                   text: 'to your',
-                  style: GoogleFonts.inter(
-                    fontSize: 18.sp,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14.sp,
                     height: 1.5,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: Colors.black.withOpacity(.6),
                   ),
                 ),
                 TextSpan(
                   text: ' USD balance ',
-                  style: GoogleFonts.inter(
-                    fontSize: 18.sp,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14.sp,
                     height: 1.5,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black.withOpacity(.6),
                   ),
                 ),
                 TextSpan(
                   text: ', Please confirm the details below and proceed.',
-                  style: GoogleFonts.inter(
-                    fontSize: 18.sp,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14.sp,
                     height: 1.5,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: Colors.black.withOpacity(.6),
                   ),
                 ),
@@ -160,6 +161,13 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8.h),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(.05),
+                  blurRadius: 3,
+                  spreadRadius: 3,
+                )
+              ],
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -171,8 +179,8 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                     children: [
                       RegularText(
                         'You Pay',
-                        fontSize: 16.sp,
-                        color: Colors.black.withOpacity(.6),
+                        fontSize: 14.sp,
+                        color: AppColors.grey,
                         fontWeight: FontWeight.w500,
                       ),
                       Spacer(),
@@ -180,9 +188,9 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                       SizedBox(width: 6.h),
                       RegularText(
                         '₦13,900',
-                        fontSize: 18.sp,
+                        fontSize: 16.sp,
                         color: Colors.black,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),
@@ -193,8 +201,8 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                     children: [
                       RegularText(
                         'Amount Exchanged',
-                        fontSize: 16.sp,
-                        color: Colors.black.withOpacity(.6),
+                        fontSize: 14.sp,
+                        color: AppColors.grey,
                         fontWeight: FontWeight.w500,
                       ),
                       Spacer(),
@@ -202,9 +210,9 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                       SizedBox(width: 6.h),
                       RegularText(
                         '₦3,900',
-                        fontSize: 18.sp,
+                        fontSize: 16.sp,
                         color: Colors.black,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),
@@ -215,8 +223,8 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                     children: [
                       RegularText(
                         'Fees',
-                        fontSize: 16.sp,
-                        color: Colors.black.withOpacity(.6),
+                        fontSize: 14.sp,
+                        color: AppColors.grey,
                         fontWeight: FontWeight.w500,
                       ),
                       Spacer(),
@@ -224,9 +232,9 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                       SizedBox(width: 6.h),
                       RegularText(
                         '₦19.5',
-                        fontSize: 18.sp,
+                        fontSize: 16.sp,
                         color: Colors.black,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),
@@ -237,16 +245,16 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                     children: [
                       RegularText(
                         'Exchange Rate',
-                        fontSize: 16.sp,
-                        color: Colors.black.withOpacity(.6),
+                        fontSize: 14.sp,
+                        color: AppColors.grey,
                         fontWeight: FontWeight.w500,
                       ),
                       Spacer(),
                       RegularText(
                         '₦1 = \$0.00130039',
-                        fontSize: 18.sp,
+                        fontSize: 16.sp,
                         color: Colors.black,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),
@@ -257,8 +265,8 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                     children: [
                       RegularText(
                         'You Get',
-                        fontSize: 16.sp,
-                        color: Colors.black.withOpacity(.6),
+                        fontSize: 14.sp,
+                        color: AppColors.grey,
                         fontWeight: FontWeight.w500,
                       ),
                       Spacer(),
@@ -266,9 +274,9 @@ class _ReviewExchangeScreenState extends State<ReviewExchangeScreen> {
                       SizedBox(width: 6.h),
                       RegularText(
                         '\$5.04',
-                        fontSize: 18.sp,
+                        fontSize: 16.sp,
                         color: Colors.black,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),

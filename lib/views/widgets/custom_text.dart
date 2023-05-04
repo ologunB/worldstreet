@@ -38,9 +38,8 @@ class RegularText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = fontFamily == 'Gilroy'
-        ? TextStyle(
-            fontFamily: fontFamily,
+    TextStyle textStyle = text.contains('₦')
+        ? GoogleFonts.inter(
             color: color,
             letterSpacing: letterSpacing,
             fontSize: fontSize,
@@ -48,23 +47,14 @@ class RegularText extends StatelessWidget {
             fontWeight: fontWeight,
             decoration: decoration,
           )
-        : fontFamily == 'Poppins'
-            ? GoogleFonts.poppins(
-                color: color,
-                letterSpacing: letterSpacing,
-                fontSize: fontSize,
-                height: height,
-                fontWeight: fontWeight,
-                decoration: decoration,
-              )
-            : GoogleFonts.inter(
-                color: color,
-                letterSpacing: letterSpacing,
-                fontSize: fontSize,
-                height: height,
-                fontWeight: fontWeight,
-                decoration: decoration,
-              );
+        : GoogleFonts.poppins(
+            color: color,
+            letterSpacing: letterSpacing,
+            fontSize: fontSize,
+            height: height,
+            fontWeight: fontWeight,
+            decoration: decoration,
+          );
     return InkWell(
       onTap: onTap,
       child: Text(text,

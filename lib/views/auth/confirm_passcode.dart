@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ft_worldstreet/views/auth/select_space_view.dart';
-import 'package:ft_worldstreet/views/widgets/utils.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
@@ -97,7 +95,7 @@ class _ConfirmPasscodeScreenState extends State<ConfirmPasscodeScreen> {
                 }
                 vm.setPasscode(controller.text);
 
-                pushReplacement(context, SelectSpaceScreen());
+                //  pushReplacement(context, SelectSpaceScreen());
               },
             ),
           ],

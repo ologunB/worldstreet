@@ -25,10 +25,10 @@ class _UsernameTransferScreenState extends State<UsernameTransferScreen> {
         centerTitle: true,
         title: RegularText(
           'Transfer Money',
-          fontSize: 24.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
         ),
       ),
       body: Padding(
@@ -40,8 +40,16 @@ class _UsernameTransferScreenState extends State<UsernameTransferScreen> {
               textInputType: TextInputType.text,
               maxLines: 1,
               controller: controller,
-              removeOutline: true,
               textInputAction: TextInputAction.next,
+              prefixIcon: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.h),
+                    child: Image.asset('assets/icons/l1.png', height: 30.h),
+                  )
+                ],
+              ),
               onChanged: (a) {
                 setState(() {});
               },
@@ -57,11 +65,11 @@ class _UsernameTransferScreenState extends State<UsernameTransferScreen> {
                           SizedBox(height: 24.h),
                           RegularText(
                             'You can search for friends using\ntheir name or WorldStreet tag',
-                            fontSize: 20.sp,
+                            fontSize: 16.sp,
                             textAlign: TextAlign.center,
                             color: Colors.black,
-                            fontWeight: FontWeight.w700,
                           ),
+                          SizedBox(height: 64.h),
                         ],
                       ),
                     )
@@ -69,7 +77,7 @@ class _UsernameTransferScreenState extends State<UsernameTransferScreen> {
                       children: [
                         SizedBox(height: 36.h),
                         RegularText(
-                          'Search result',
+                          'Search results',
                           fontSize: 14.sp,
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
@@ -87,25 +95,22 @@ class _UsernameTransferScreenState extends State<UsernameTransferScreen> {
                                     push(context, CompleteTransferScreen());
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.all(13.h),
+                                    padding: EdgeInsets.all(11.h),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.h),
-                                      color: Colors.white,
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(10.h),
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            color: Color(0xffCDCDCD))),
                                     child: Row(
                                       children: [
                                         CircleAvatar(
                                           radius: 28.h,
                                           backgroundColor: Color(0xff291CC0),
-                                          child: RegularText(
-                                            'E',
-                                            fontSize: 32.sp,
-                                            textAlign: TextAlign.center,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                          child: Image.asset(
+                                              'assets/icons/person.png'),
                                         ),
-                                        SizedBox(width: 24.h),
+                                        SizedBox(width: 12.h),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -113,20 +118,17 @@ class _UsernameTransferScreenState extends State<UsernameTransferScreen> {
                                               MainAxisAlignment.center,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            SizedBox(height: 12.h),
                                             RegularText(
                                               'Emmanuel O.',
-                                              fontSize: 14.sp,
+                                              fontSize: 16.sp,
                                               color: Colors.black,
-                                              fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                             SizedBox(height: 4.h),
                                             RegularText(
                                               '@emmanuelO',
-                                              fontSize: 14.sp,
-                                              color:
-                                                  Colors.black.withOpacity(.5),
-                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12.sp,
+                                              color: AppColors.grey,
                                             ),
                                           ],
                                         ),

@@ -24,7 +24,7 @@ class _RequestMoneyScreenState extends State<RequestMoneyScreen> {
           fontSize: 16.sp,
           height: 50.h,
           textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           onPressed: () {},
         ),
       ),
@@ -36,7 +36,7 @@ class _RequestMoneyScreenState extends State<RequestMoneyScreen> {
         centerTitle: true,
         title: RegularText(
           'Request money',
-          fontSize: 24.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
           fontWeight: FontWeight.w600,
@@ -48,54 +48,54 @@ class _RequestMoneyScreenState extends State<RequestMoneyScreen> {
           SizedBox(height: 20.h),
           RegularText(
             'Get Paid via a link',
-            fontSize: 24.sp,
+            fontSize: 18.sp,
             color: Colors.black,
             textAlign: TextAlign.center,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
           ),
           SizedBox(height: 4.h),
           RegularText(
             'Share your link to get paid by anyone',
-            fontSize: 18.sp,
-            color: Colors.black,
+            fontSize: 16.sp,
+            color: AppColors.greyDark1,
             textAlign: TextAlign.center,
-            fontWeight: FontWeight.w500,
           ),
           SizedBox(height: 36.h),
           Container(
-            padding: EdgeInsets.all(24.h),
+            padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 46.h),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8.h),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(.05),
+                  blurRadius: 3,
+                  spreadRadius: 3,
+                )
+              ],
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  radius: 36.h,
+                  radius: 23.h,
                   backgroundColor: Color(0xff291CC0),
-                  child: RegularText(
-                    'E',
-                    fontSize: 32.sp,
-                    textAlign: TextAlign.center,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  child: Image.asset('assets/icons/person.png'),
                 ),
                 SizedBox(height: 16.h),
                 RegularText(
-                  'Emmanuel Omale',
-                  fontSize: 24.sp,
+                  'Emmanuel o.',
+                  fontSize: 18.sp,
                   textAlign: TextAlign.center,
                   fontWeight: FontWeight.w600,
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 6.h),
                 RegularText(
                   '@emmanuelO',
-                  fontSize: 20.sp,
+                  fontSize: 14.sp,
                   textAlign: TextAlign.center,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   color: AppColors.greyDark1,
                 ),
                 SizedBox(height: 18.h),
@@ -103,18 +103,12 @@ class _RequestMoneyScreenState extends State<RequestMoneyScreen> {
                   padding:
                       EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.h),
                   decoration: BoxDecoration(
-                    color: Color(0xffD9D9D9),
+                    color: Color(0xffE7F4FD),
                     borderRadius: BorderRadius.circular(118.h),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Image.asset(
-                        'assets/icons/copy.png',
-                        color: Colors.black,
-                        height: 16.h,
-                      ),
-                      SizedBox(width: 8.h),
                       Expanded(
                         child: RegularText(
                           'https://useworldstreet.com/emmanuelo',
@@ -123,6 +117,12 @@ class _RequestMoneyScreenState extends State<RequestMoneyScreen> {
                           fontWeight: FontWeight.w600,
                           color: Colors.black,
                         ),
+                      ),
+                      SizedBox(width: 8.h),
+                      Image.asset(
+                        'assets/icons/copy.png',
+                        color: Colors.black,
+                        height: 16.h,
                       ),
                     ],
                   ),

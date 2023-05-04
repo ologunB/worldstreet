@@ -24,10 +24,10 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
           buttonColor: AppColors.skyBlue,
           borderColor: AppColors.skyBlue,
           borderRadius: 8.h,
-          fontSize: 18.sp,
+          fontSize: 16.sp,
           height: 50.h,
           textColor: AppColors.white,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           onPressed: () {
             push(context, CompleteKYCScreen());
           },
@@ -37,10 +37,17 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
         padding: EdgeInsets.all(24.h),
         children: [
           Container(
-            height: 190.h,
-            padding: EdgeInsets.all(24.h),
+            height: 130.h,
+            padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 14.h),
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(.05),
+                  blurRadius: 3,
+                  spreadRadius: 3,
+                )
+              ],
               borderRadius: BorderRadius.circular(8.h),
             ),
             child: Stack(
@@ -50,56 +57,44 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
                   height: 22.h,
                 ),
                 Align(
-                  alignment: Alignment.bottomRight,
-                  child: Image.asset(
-                    'assets/icons/mc.png',
-                    height: 28.h,
-                  ),
-                ),
-                Align(
                   alignment: Alignment.topRight,
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 6.h, vertical: 2.h),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14)),
-                    child: RegularText(
-                      'VIRTUAL CARD',
-                      fontSize: 10.sp,
-                      color: Colors.black,
-                      textAlign: TextAlign.center,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+                  child: Image.asset('assets/icons/mc.png', height: 19.h),
                 ),
                 Align(
-                    alignment: Alignment.bottomLeft,
+                    alignment: Alignment.center,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         RegularText(
-                          'BALANCE',
-                          fontSize: 10.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
+                          '**** **** **** 1234',
+                          fontSize: 18.sp,
+                          color: Colors.black,
+                          textAlign: TextAlign.center,
+                          fontWeight: FontWeight.w500,
                         ),
-                        SizedBox(height: 4.h),
+                        SizedBox(height: 2.h),
                         RegularText(
-                          '\$0',
-                          fontSize: 10.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
+                          'Adedeji Daniel',
+                          fontSize: 12.sp,
+                          color: Colors.black,
+                          textAlign: TextAlign.center,
                         ),
                       ],
+                    )),
+                Align(
+                    alignment: Alignment.bottomLeft,
+                    child: RegularText(
+                      '\$986.30',
+                      fontSize: 10.sp,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
                     )),
               ],
             ),
           ),
           SizedBox(height: 40.h),
           Container(
-            padding: EdgeInsets.all(24.h),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8.h),
@@ -108,46 +103,73 @@ class _CreateCardScreenState extends State<CreateCardScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                RegularText(
-                  'Card creation fee',
-                  fontSize: 14.sp,
-                  color: Color(0xff6B6767),
-                  fontWeight: FontWeight.w500,
+                Row(
+                  children: [
+                    Image.asset('assets/icons/cc0.png', height: 45.h),
+                    SizedBox(width: 12.h),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RegularText(
+                          'Free',
+                          fontSize: 16.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        RegularText(
+                          'Card creation fee',
+                          fontSize: 12.sp,
+                          color: Color(0xff6B6767),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-                SizedBox(height: 4.h),
-                RegularText(
-                  'Free',
-                  fontSize: 14.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
+                SizedBox(height: 32.h),
+                Row(
+                  children: [
+                    Image.asset('assets/icons/cc1.png', height: 45.h),
+                    SizedBox(width: 12.h),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RegularText(
+                          'Free',
+                          fontSize: 16.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        RegularText(
+                          'Transaction fees',
+                          fontSize: 12.sp,
+                          color: Color(0xff6B6767),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-                SizedBox(height: 12.h),
-                RegularText(
-                  'Transaction fees',
-                  fontSize: 14.sp,
-                  color: Color(0xff6B6767),
-                  fontWeight: FontWeight.w500,
-                ),
-                SizedBox(height: 4.h),
-                RegularText(
-                  'Free',
-                  fontSize: 14.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
-                SizedBox(height: 12.h),
-                RegularText(
-                  '3D Secure',
-                  fontSize: 14.sp,
-                  color: Color(0xff6B6767),
-                  fontWeight: FontWeight.w500,
-                ),
-                SizedBox(height: 4.h),
-                RegularText(
-                  'No',
-                  fontSize: 14.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
+                SizedBox(height: 32.h),
+                Row(
+                  children: [
+                    Image.asset('assets/icons/cc2.png', height: 45.h),
+                    SizedBox(width: 12.h),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RegularText(
+                          'No',
+                          fontSize: 16.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        RegularText(
+                          '3D Secure',
+                          fontSize: 12.sp,
+                          color: Color(0xff6B6767),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ],
             ),

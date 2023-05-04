@@ -27,79 +27,98 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
         centerTitle: true,
         title: RegularText(
           'Exchange Money',
-          fontSize: 17.sp,
+          fontSize: 18.sp,
           color: Colors.black,
           textAlign: TextAlign.center,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w500,
         ),
       ),
       body: ListView(
         padding: EdgeInsets.all(24.h),
         children: [
-          field('You Pay'),
-          SizedBox(height: 6.h),
-          RegularText(
-            'Your NGN Balance is 760,000',
-            fontSize: 12.sp,
-            color: Colors.black.withOpacity(.5),
-            fontWeight: FontWeight.w700,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              RegularText(
+                'Balance: ',
+                fontSize: 14.sp,
+                color: AppColors.grey,
+                fontWeight: FontWeight.w500,
+              ),
+              RegularText(
+                '₦760,000',
+                fontSize: 14.sp,
+                color: Color(0xff23845B),
+                fontWeight: FontWeight.w600,
+              ),
+            ],
           ),
+          field('You Pay'),
           SizedBox(height: 18.h),
           Row(
             children: [
-              CircleAvatar(
-                radius: 10.h,
-                backgroundColor: Color(0xff6BF581),
-                child: Icon(Icons.add_rounded, size: 16.h),
-              ),
+              Image.asset('assets/icons/e1.png', height: 30.h),
               SizedBox(width: 10.h),
               RegularText(
                 'NGN 754 = USD 1.00',
                 fontSize: 14.sp,
-                color: Colors.black.withOpacity(.5),
-                fontWeight: FontWeight.w700,
+                color: AppColors.grey,
+                fontWeight: FontWeight.w500,
               ),
             ],
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 10.h),
           Row(
             children: [
-              CircleAvatar(
-                radius: 10.h,
-                backgroundColor: Color(0xff6BF581),
-                child: Icon(Icons.add_rounded, size: 16.h),
+              Image.asset('assets/icons/e1.png', height: 30.h),
+              SizedBox(width: 10.h),
+              RegularText(
+                'Exchange fee = ₦450',
+                fontSize: 14.sp,
+                color: AppColors.grey,
+                fontWeight: FontWeight.w500,
+              ),
+            ],
+          ),
+          SizedBox(height: 10.h),
+          Row(
+            children: [
+              RegularText(
+                'In USD - You’ll get ',
+                fontSize: 14.sp,
+                color: AppColors.grey,
+                fontWeight: FontWeight.w400,
               ),
               SizedBox(width: 10.h),
               RegularText(
-                'Exchange fee = N450',
+                '₦1,000',
                 fontSize: 14.sp,
-                color: Colors.black.withOpacity(.5),
-                fontWeight: FontWeight.w700,
+                color: AppColors.black,
+                fontWeight: FontWeight.w600,
               ),
             ],
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 10.h),
           field('You Get'),
           SizedBox(height: 18.h),
-          GeneralButton(
-            'Continue',
-            buttonColor: Colors.black,
-            borderColor: Colors.black,
-            borderRadius: 8.h,
-            fontSize: 17.sp,
-            height: 42.h,
-            textColor: AppColors.white,
-            fontWeight: FontWeight.w600,
-            onPressed: () {
-              push(context, ReviewExchangeScreen());
-            },
-          ),
-          SizedBox(height: 16.h),
           PinKeyboard(
             onConfirm: (a) {},
             onBiometric: () {},
             length: 4,
             onChange: (a) {},
+          ),
+          GeneralButton(
+            'Continue',
+            buttonColor: AppColors.skyBlue,
+            borderColor: AppColors.skyBlue,
+            borderRadius: 8.h,
+            fontSize: 16.sp,
+            height: 48.h,
+            textColor: AppColors.white,
+            fontWeight: FontWeight.w500,
+            onPressed: () {
+              push(context, ReviewExchangeScreen());
+            },
           ),
         ],
       ),
@@ -110,11 +129,9 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 4.h),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(.2),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10.h),
-        border: Border.all(
-          color: Colors.black.withOpacity(.5),
-        ),
+        border: Border.all(color: Colors.black.withOpacity(.5)),
       ),
       child: Row(
         children: [
@@ -154,8 +171,8 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                 RegularText(
                   type,
                   fontSize: 14.sp,
-                  color: Colors.black.withOpacity(.5),
-                  fontWeight: FontWeight.w700,
+                  color: AppColors.grey,
+                  fontWeight: FontWeight.w500,
                 ),
                 CupertinoTextField(
                   decoration: BoxDecoration(color: Colors.transparent),

@@ -65,29 +65,29 @@ class _WorldStreetFieldState extends State<WorldStreetField> {
         maxLength: widget.maxLength,
         inputFormatters: widget.inputFormatters,
         textInputAction: widget.textInputAction,
-        style: GoogleFonts.inter(
+        style: GoogleFonts.poppins(
           color: AppColors.black,
           fontSize: widget.fontSize ?? 14.sp,
           fontWeight:
-              widget.fontSize == null ? FontWeight.w400 : FontWeight.w800,
+              widget.fontSize == null ? FontWeight.w600 : FontWeight.w500,
         ),
         decoration: InputDecoration(
           counterText: '',
           hintText: widget.hintText,
-          hintStyle: GoogleFonts.inter(
+          hintStyle: GoogleFonts.poppins(
             color: AppColors.grey,
             fontSize: widget.fontSize ?? 14.sp,
             fontWeight: FontWeight.w400,
           ),
           labelText: widget.labelText,
-          labelStyle: GoogleFonts.inter(
+          labelStyle: GoogleFonts.poppins(
             color: AppColors.grey,
             fontSize: widget.fontSize ?? 14.sp,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w400,
           ),
           filled: true,
           fillColor: Colors.white,
-          errorStyle: GoogleFonts.inter(
+          errorStyle: GoogleFonts.poppins(
             color: AppColors.red,
             fontSize: 10.5.sp,
             fontWeight: FontWeight.w400,
@@ -97,42 +97,42 @@ class _WorldStreetFieldState extends State<WorldStreetField> {
           suffix: widget.suffix,
           border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: widget.removeOutline ? Colors.white : AppColors.grey,
+              color: widget.removeOutline ? Colors.white : AppColors.dGrey,
               width: 1.h,
             ),
             borderRadius: BorderRadius.circular(12.h),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: widget.removeOutline ? Colors.white : AppColors.grey,
+              color: widget.removeOutline ? Colors.white : AppColors.dGrey,
               width: 1.h,
             ),
             borderRadius: BorderRadius.circular(12.h),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: widget.removeOutline ? Colors.white : AppColors.grey,
+              color: widget.removeOutline ? Colors.white : AppColors.dGrey,
               width: 1.h,
             ),
             borderRadius: BorderRadius.circular(12.h),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: widget.removeOutline ? Colors.white : AppColors.grey,
+              color: widget.removeOutline ? Colors.white : AppColors.dGrey,
               width: 1.h,
             ),
             borderRadius: BorderRadius.circular(12.h),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: widget.removeOutline ? Colors.white : AppColors.grey,
+              color: widget.removeOutline ? Colors.white : AppColors.dGrey,
               width: 1.h,
             ),
             borderRadius: BorderRadius.circular(12.h),
           ),
           disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: widget.removeOutline ? Colors.white : AppColors.grey,
+              color: widget.removeOutline ? Colors.white : AppColors.dGrey,
               width: 1.h,
             ),
             borderRadius: BorderRadius.circular(12.h),
